@@ -10,12 +10,12 @@ The drivers in this repository provide a high-level interface to the peripherals
 The following drivers are included in this repository:
 
 1. MCAL
-* GPIO
+* GPIO (External Interrupt Included In GPIO Driver)
 * Timer (Not Included Yet)
 * ADC (Not Included Yet)
 * I2C (Not Included Yet)
 * SPI (Not Included Yet)
-* USART (Not Included Yet)
+* UART
 * External EEPROM (Not Included Yet)
 
 2. HAL
