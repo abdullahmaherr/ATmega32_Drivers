@@ -115,7 +115,7 @@ void HAL_LCD_SendCommand(uint8_t a_command);
  * Parameter (in) : character to display.
  * Return         : None.
  * Note           : None*/
-void HAL_LCD_DisplayCharacter(sint8_t a_data);
+void HAL_LCD_DisplayCharacter(uint8_t a_data);
 
 /**===============================================================================
  * Function Name  : HAL_LCD_DisplayString.
@@ -123,7 +123,7 @@ void HAL_LCD_DisplayCharacter(sint8_t a_data);
  * Parameter (in) : Pointer to String to Display.
  * Return         : None.
  * Note           : None*/
-void HAL_LCD_DisplayString(const sint8_t * p_str);
+void HAL_LCD_DisplayString(const uint8_t * p_str);
 
 /**===============================================================================
  * Function Name  : HAL_LCD_MoveCursor.
@@ -142,7 +142,7 @@ void HAL_LCD_MoveCursor(uint8_t a_row,uint8_t a_col);
  * Parameter (in) : Pointer to String to Display.
  * Return         : None.
  * Note           : None*/
-void HAL_LCD_DisplayStringRowCol(uint8_t a_row,uint8_t a_col,const sint8_t * p_str);
+void HAL_LCD_DisplayStringRowCol(uint8_t a_row,uint8_t a_col,const uint8_t * p_str);
 
 /**===============================================================================
  * Function Name  : HAL_LCD_ClearScreen.
@@ -158,6 +158,6 @@ void HAL_LCD_ClearScreen(void);
  * Parameter (in) : The Integer Number.
  * Return         : None.
  * Note           : None*/
-void HAL_LCD_IntgerToString(sint32_t a_data);
+void HAL_LCD_IntgerToString(uint32_t a_data);
 
 #endif /* INC_LCD_H_ */

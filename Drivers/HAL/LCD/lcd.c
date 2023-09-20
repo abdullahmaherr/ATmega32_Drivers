@@ -113,7 +113,7 @@ void HAL_LCD_SendCommand(uint8_t a_command)
 	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, LOGIC_HIGH);/* Enable LCD E=1 */
 }
 
-void HAL_LCD_DisplayCharacter(sint8_t a_data)
+void HAL_LCD_DisplayCharacter(uint8_t a_data)
 {
 	delay_ms(5);/*Delay for Processing*/
 	MCAL_GPIO_WritePin(LCD_RS_PORT, LCD_RS_PIN, LOGIC_HIGH);/*RS = 1 Data Mode */
@@ -150,7 +150,7 @@ void HAL_LCD_DisplayCharacter(sint8_t a_data)
 	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, LOGIC_HIGH);/* Enable LCD E=1 */
 }
 
-void HAL_LCD_DisplayString(const sint8_t * p_str)
+void HAL_LCD_DisplayString(const uint8_t * p_str)
 {
 	uint8_t count;
 
@@ -197,7 +197,7 @@ void HAL_LCD_MoveCursor(uint8_t a_row,uint8_t a_col)
 	HAL_LCD_SendCommand((lcd_memory_address | LCD_CMD_BEGIN_AT_FIRST_ROW));
 }
 
-void HAL_LCD_DisplayStringRowCol(uint8_t a_row,uint8_t a_col,const sint8_t * p_str)
+void HAL_LCD_DisplayStringRowCol(uint8_t a_row,uint8_t a_col,const uint8_t * p_str)
 {
 	HAL_LCD_MoveCursor(a_row, a_col);
 	HAL_LCD_DisplayString(p_str);
@@ -208,9 +208,9 @@ void HAL_LCD_ClearScreen(void)
 	HAL_LCD_SendCommand(LCD_CMD_CLEAR_SCREEN);
 }
 
-void HAL_LCD_IntgerToString(sint32_t a_data)
+void HAL_LCD_IntgerToString(uint32_t a_data)
 {
-	sint8_t buffer[16];
+	uint8_t buffer[16];
 	itoa(a_data,buffer,10);/*The function ltoa() converts the long integer value from val into an ASCII representation*/
 	HAL_LCD_DisplayString(buffer);
 }

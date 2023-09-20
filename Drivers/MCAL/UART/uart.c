@@ -22,10 +22,10 @@
 
 void MCAL_UART_Init(uint32_t a_baudRate)
 {
-	uint16_t ubrrReg;
+	uint16_t ubrrReg = 0;
 
 	/* Double Mode Speed */
-	UCSRA = (1<< U2X) ;
+	UCSRA = (1<<U2X) ;
 
 	/* All Interrupt Disabled, TXRX Enabled, Without The Ninth Bit */
 	UCSRB = (1<<RXEN) | (1<<TXEN) ;
@@ -42,7 +42,7 @@ void MCAL_UART_Init(uint32_t a_baudRate)
 }
 
 
-void MCAL_UART_TX(uint8_t a_data)
+void MCAL_UART_TX(const uint8_t a_data)
 {
 	/* Wait Until The Buffer Is Empty */
 	while(BIT_IS_CLEAR(UCSRA,UDRE));
@@ -71,21 +71,27 @@ void MCAL_UART_sendString(const uint8_t *p_str)
 
 void MCAL_UART_receiveString(uint8_t *p_str)
 {
-	/* Receiving The String */
-	do{
-		*p_str = MCAL_UART_RX();
-		p_str++;
-	}while(*p_str != '#');
+	uint8_t i = 0;
+
+	/* Receiving The First Byte */
+	p_str[i] = MCAL_UART_RX();
+
+	/* Receiving The Rest Bytes */
+	while(p_str[i] != '#')
+	{
+		i++;
+		p_str[i] = MCAL_UART_RX();
+	}
 
 	/* After Receiving The String Replace The '#' With '\0' */
-	*p_str = '\0';
+	p_str[i] = '\0';
 }
 
 
 void MCAL_UART_sendNumber(uint32_t a_num)
 {
 	/* Accessing The Number Byte By Byte*/
-	uint8_t *p_temp = (uint8_t*)&a_num;
+	uint8_t *p_temp =(uint8_t*)(&a_num);
 
 	MCAL_UART_TX(p_temp[0]);
 	MCAL_UART_TX(p_temp[1]);
@@ -98,7 +104,7 @@ uint32_t MCAL_UART_receiveNumber(void)
 {
 	uint32_t num;
 	/* Accessing The Number Byte By Byte*/
-	uint8_t *p_temp = (uint8_t*)&num;
+	uint8_t *p_temp = (uint8_t*)(&num);
 
 	/* Receiving Byte By Byte */
 	p_temp[0]= MCAL_UART_RX();

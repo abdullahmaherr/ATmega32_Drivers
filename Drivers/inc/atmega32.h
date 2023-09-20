@@ -55,10 +55,10 @@
 #define TOGGLE_BIT(REG,BIT) (REG ^= (1<<BIT))
 
 /* Check if a Specific Bit in any Register is Set*/
-#define BIT_IS_SET(REG,BIT) (REG &= (1<<BIT))
+#define BIT_IS_SET(REG,BIT) ((REG) & (1<<BIT))
 
 /* Check if a Specific Bit in any Register is Cleared*/
-#define BIT_IS_CLEAR(REG,BIT) (!(REG &= (1<<BIT)))
+#define BIT_IS_CLEAR(REG,BIT) (!((REG) & (1<<BIT)))
 
 /*Get Specific BIT Value*/
 #define GET_BIT(REG,BIT) ((REG & (1<<BIT)) >> BIT)
