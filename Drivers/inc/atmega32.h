@@ -22,7 +22,14 @@
 #include "std_types.h"
 #include"stdlib.h"
 
+/*===============================================================================
+ *           		   Global Interrupt Enable/Disable Macros 	 	             *
+ ================================================================================*/
+/*The AVR Instruction To Enable Global Interrupt */
+#define SEI()			(__asm__ __volatile__("sei" ::))
 
+/*The AVR Instruction To Disable Global Interrupt */
+#define CLI()			(__asm__ __volatile__("cli" ::))
 
 /*===============================================================================
  *           		    	   	   Generic Macros  		  	                     *

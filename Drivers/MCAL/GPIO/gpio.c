@@ -10,8 +10,15 @@
  * Created on: May 1, 2023
  =============================================================================================*/
 
+/*===============================================================================
+ *                                Includes                                       *
+ ================================================================================*/
 #include "gpio.h"
 
+
+/*===============================================================================
+ *                              API Definitions                                  *
+ ================================================================================*/
 void MCAL_GPIO_PinInit(uint8_t PORTx, uint8_t PINx, uint8_t Direction)
 {
 	/*
@@ -286,3 +293,66 @@ void MCAL_GPIO_WritePort(uint8_t PORTx, uint8_t a_Value)
 		}
 	}
 }
+
+void MCAL_GPIO_INT0Init(uint8_t a_triggerCase, uint8_t a_IntMask)
+{
+	/*Configure PORTD PIN2 as Input for INT1*/
+	DDRD &= (~(1<<PD2));
+
+	/*Configure Trigger Case if Raising or Failing or Both*/
+	MCUCR |= (a_triggerCase & 0x03);
+
+	/*Enable/Disable MASK INT1*/
+	switch(a_IntMask)
+	{
+	case INT_MASK_DISABLE:
+		CLEAR_BIT(GICR,INT0); break;
+	case INT_MASK_ENABLE:
+		SET_BIT(GICR,INT0); break;
+	}
+}
+
+void MCAL_GPIO_INT1Init(uint8_t a_triggerCase, uint8_t a_IntMask)
+{
+	/*Configure PORTD PIN3 as Input for INT0*/
+	DDRD &= (~(1<<PD3));
+
+	/*Configure Trigger Case if Raising or Failing or Both*/
+	MCUCR |= ((a_triggerCase & 0x03) << 2);
+
+	/*Enable/Disable MASK INT0*/
+	switch(a_IntMask)
+	{
+	case INT_MASK_DISABLE:
+		CLEAR_BIT(GICR,INT1); break;
+	case INT_MASK_ENABLE:
+		SET_BIT(GICR,INT1); break;
+	}
+}
+
+void MCAL_GPIO_INT2Init(uint8_t a_triggerCase, uint8_t a_IntMask)
+{
+	/*Configure PORTB PIN2 as Input for INT2*/
+	DDRB &= (~(1<<PB2));
+
+	/*Configure Trigger Case if Raising or Failing or Both*/
+	switch(a_triggerCase)
+	{
+	case INT_FALLING_TRIG:
+		CLEAR_BIT(MCUCSR,ISC2); break;
+	case INT_RISING_TRIG:
+		SET_BIT(MCUCSR,ISC2); break;
+	default:
+		return;
+	}
+
+	/*Enable/Disable MASK INT2*/
+	switch(a_IntMask)
+	{
+	case INT_MASK_DISABLE:
+		CLEAR_BIT(GICR,INT2); break;
+	case INT_MASK_ENABLE:
+		SET_BIT(GICR,INT2); break;
+	}
+}
+
