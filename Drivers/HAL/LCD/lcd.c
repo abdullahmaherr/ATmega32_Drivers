@@ -211,7 +211,7 @@ void HAL_LCD_ClearScreen(void)
 void HAL_LCD_IntgerToString(uint32_t a_data)
 {
 	uint8_t buffer[16];
-	itoa(a_data,buffer,10);/*The function ltoa() converts the long integer value from val into an ASCII representation*/
+	itoa(a_data,buffer,10); /*The function ltoa() converts the long integer value from val into an ASCII representation*/
 	HAL_LCD_DisplayString(buffer);
 }
 

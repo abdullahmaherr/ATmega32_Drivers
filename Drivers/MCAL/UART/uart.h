@@ -23,9 +23,11 @@
  *                       Macros Configuration References                         *
  ================================================================================*/
 #ifndef F_CPU
-#define F_CPU 8000000UL
+#define F_CPU 1000000UL
 #endif
 
+/* Sent By The Receiver To Inform The Transmitter To Start */
+#define RX_READY 0x10
 /*===============================================================================
  *                                	   APIs 		   		                     *
  ================================================================================*/
@@ -35,7 +37,8 @@
  * Brief          : Function To Initialize The UART.
  * Parameter (in) : Pin Configuration.
  * Return         : None.
- * Note           : The Initialization : Synchronous, Double Speed, Without Interrupt, 1-Stop Bit, Without Parity Bit, 8-Bit Data. */
+ * Note           : The Initialization : Asynchronous, Double Speed, Without Interrupt, 1-Stop Bit,
+					Without Parity Bit, 8-Bit Data. (The Recommended Baud Rate 9600) */
 void MCAL_UART_Init(uint32_t a_baudRate);
 
 /**===============================================================================
@@ -59,7 +62,7 @@ uint8_t MCAL_UART_RX(void);
  * Brief          : Function To Send String By Using The UART.
  * Parameter (in) : The String To Send It.
  * Return         : None.
- * Note           : At The End Of Your String Add '#' To Inform The Receiver The End Of Your String	*/
+ * Note           : Add '#' At The End Of Your String To Inform The Receiver The End Of Your String	*/
 void MCAL_UART_sendString(const uint8_t *p_str);
 
 /**===============================================================================

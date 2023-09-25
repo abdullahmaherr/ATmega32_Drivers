@@ -14,9 +14,10 @@ The following drivers are included in this repository:
 * Timer (Not Included Yet)
 * ADC (Not Included Yet)
 * I2C (Not Included Yet)
-* SPI (Not Included Yet)
+* SPI 
 * UART
 * External EEPROM (Not Included Yet)
+
 
 2. HAL
 * Keypad
