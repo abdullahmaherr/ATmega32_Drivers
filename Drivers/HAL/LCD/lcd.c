@@ -152,7 +152,7 @@ void HAL_LCD_DisplayCharacter(uint8_t a_data)
 
 void HAL_LCD_DisplayString(const uint8_t * p_str)
 {
-	uint8_t count;
+	uint8_t count = 0;
 
 	while((*p_str) != '\0')
 	{

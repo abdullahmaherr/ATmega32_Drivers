@@ -17,25 +17,29 @@
 
 /**===============================================================================
  * Function Name  : delay_ms.
- * Brief          : Function To Make Delay.
- * Parameter (in) : delay time.
- * Return         : None.
+ * Brief          : Function To Adjust Key Number.
+ * Parameter (in) : The Button Number Position.
+ * Return         : The Number On The Keypad.
  * Note           : None																				*/
 static void delay_ms(uint32_t delay);
 
 #ifndef STANDARD_KEYPAD
 
 #if (KEYPAD_NUM_COL == 3)
-/*
- * Function responsible for mapping the switch number in the keypad to
- * its corresponding functional number in the proteus for 4x3 keypad
- */
+/**===============================================================================
+ * Function Name  : KEYPAD_4x3_adjustKeyNumber.
+ * Brief          : Function To Adjust Key Number.
+ * Parameter (in) : The Button Number Position.
+ * Return         : The Number On The Keypad.
+ * Note           : None*/
 static uint8_t KEYPAD_4x3_adjustKeyNumber(uint8_t button_number);
 #elif (KEYPAD_NUM_COL == 4)
-/*
- * Function responsible for mapping the switch number in the keypad to
- * its corresponding functional number in the proteus for 4x4 keypad
- */
+/**===============================================================================
+ * Function Name  : KEYPAD_4x4_adjustKeyNumber.
+ * Brief          : Function To Adjust Key Number.
+ * Parameter (in) : The Button Number .
+ * Return         : The Number On The Keypad.
+ * Note           : None*/
 static uint8_t KEYPAD_4x4_adjustKeyNumber(uint8_t button_number);
 #endif
 
@@ -89,7 +93,7 @@ uint8_t HAL_KEYPAD_PressedKey(void)
 				}
 			}
 			MCAL_GPIO_PinInit(KEYPAD_ROW_PORT_ID,(KEYPAD_ROW_FIRST_PIN_ID+row), GPIO_PIN_INPUT);
-			delay_ms(5);
+			delay_ms(50);
 		}
 	}
 }
