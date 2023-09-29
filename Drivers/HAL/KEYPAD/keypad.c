@@ -13,15 +13,9 @@
 #include "keypad.h"
 #include"atmega32.h"
 #include"gpio.h"
+#include "util/delay.h"
 
 
-/**===============================================================================
- * Function Name  : delay_ms.
- * Brief          : Function To Adjust Key Number.
- * Parameter (in) : The Button Number Position.
- * Return         : The Number On The Keypad.
- * Note           : None																				*/
-static void delay_ms(uint32_t delay);
 
 #ifndef STANDARD_KEYPAD
 
@@ -29,10 +23,10 @@ static void delay_ms(uint32_t delay);
 /**===============================================================================
  * Function Name  : KEYPAD_4x3_adjustKeyNumber.
  * Brief          : Function To Adjust Key Number.
- * Parameter (in) : The Button Number Position.
+ * Parameter (in) : The Button Number .
  * Return         : The Number On The Keypad.
  * Note           : None*/
-static uint8_t KEYPAD_4x3_adjustKeyNumber(uint8_t button_number);
+static uint8_t KEYPAD_4x3_adjustKeyNumber(uint8_t a_button);
 #elif (KEYPAD_NUM_COL == 4)
 /**===============================================================================
  * Function Name  : KEYPAD_4x4_adjustKeyNumber.
@@ -40,7 +34,7 @@ static uint8_t KEYPAD_4x3_adjustKeyNumber(uint8_t button_number);
  * Parameter (in) : The Button Number .
  * Return         : The Number On The Keypad.
  * Note           : None*/
-static uint8_t KEYPAD_4x4_adjustKeyNumber(uint8_t button_number);
+static uint8_t KEYPAD_4x4_adjustKeyNumber(uint8_t a_button);
 #endif
 
 #endif /* STANDARD_KEYPAD */
@@ -71,7 +65,7 @@ uint8_t HAL_KEYPAD_PressedKey(void)
 		{
 			MCAL_GPIO_PinInit(KEYPAD_ROW_PORT_ID,(KEYPAD_ROW_FIRST_PIN_ID+row), GPIO_PIN_OUTPUT);
 
-			MCAL_GPIO_WritePin(KEYPAD_ROW_PORT_ID, (KEYPAD_ROW_FIRST_PIN_ID+row), LOGIC_LOW);
+			MCAL_GPIO_WritePin(KEYPAD_ROW_PORT_ID, (KEYPAD_ROW_FIRST_PIN_ID+row), KEYPAD_BUTTON_PRESSED);
 
 			for(col = 0; col < KEYPAD_NUM_COL; col++)/* loop for cols */
 			{
@@ -93,7 +87,7 @@ uint8_t HAL_KEYPAD_PressedKey(void)
 				}
 			}
 			MCAL_GPIO_PinInit(KEYPAD_ROW_PORT_ID,(KEYPAD_ROW_FIRST_PIN_ID+row), GPIO_PIN_INPUT);
-			delay_ms(50);
+			_delay_ms(5);
 		}
 	}
 }
@@ -102,10 +96,10 @@ uint8_t HAL_KEYPAD_PressedKey(void)
 
 #if (KEYPAD_NUM_COL == 3)
 
-static uint8_t KEYPAD_4x3_adjustKeyNumber(uint8_t button_number)
+static uint8_t KEYPAD_4x3_adjustKeyNumber(uint8_t a_button)
 {
 	uint8_t keypad_button = 0;
-	switch(button_number)
+	switch(a_button)
 	{
 	case 10: keypad_button = '*'; // ASCII Code of *
 	break;
@@ -113,7 +107,7 @@ static uint8_t KEYPAD_4x3_adjustKeyNumber(uint8_t button_number)
 	break;
 	case 12: keypad_button = '#'; // ASCII Code of #
 	break;
-	default: keypad_button = button_number;
+	default: keypad_button = a_button;
 	break;
 	}
 	return keypad_button;
@@ -121,10 +115,10 @@ static uint8_t KEYPAD_4x3_adjustKeyNumber(uint8_t button_number)
 
 #elif (KEYPAD_NUM_COL == 4)
 
-static uint8_t KEYPAD_4x4_adjustKeyNumber(uint8_t button_number)
+static uint8_t KEYPAD_4x4_adjustKeyNumber(uint8_t a_button)
 {
 	uint8_t keypad_button = 0;
-	switch(button_number)
+	switch(a_button)
 	{
 	case 1: keypad_button = 7;
 	break;
@@ -158,7 +152,7 @@ static uint8_t KEYPAD_4x4_adjustKeyNumber(uint8_t button_number)
 	break;
 	case 16: keypad_button = '+'; /* ASCII Code of '+' */
 	break;
-	default: keypad_button = button_number;
+	default: keypad_button = a_button;
 	break;
 	}
 	return keypad_button;
@@ -168,12 +162,3 @@ static uint8_t KEYPAD_4x4_adjustKeyNumber(uint8_t button_number)
 
 #endif /* STANDARD_KEYPAD */
 
-
-static void delay_ms(uint32_t delay)
-{
-	uint32_t i, j;
-	for (i = 0; i < delay; i++)
-	{
-		for (j = 0; j < 255; j++);
-	}
-}
