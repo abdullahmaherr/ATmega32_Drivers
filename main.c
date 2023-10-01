@@ -1,12 +1,9 @@
 /*
  * main.c
  *
- *  Created on: Sep 8, 2023
- *      Author: Abdullah
+ * 
+ *      Author: Abdullah Maher
  */
-#include "gpio.h"
-#include "lcd.h"
-#include "keypad.h"
 
 
 
