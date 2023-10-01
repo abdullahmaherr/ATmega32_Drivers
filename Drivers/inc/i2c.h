@@ -58,7 +58,7 @@
 /**===============================================================================
  * Function Name  : MCAL_I2C_Init.
  * Brief          : Function To Initialize The I2C(TWI) Communication Protocol.
- * Parameter (in) : Pin Configuration.
+ * Parameter (in) : None.
  * Return         : None.
  * Note           : None.																	*/
 void MCAL_I2C_Init(void);

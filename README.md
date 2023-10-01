@@ -11,17 +11,16 @@ The following drivers are included in this repository:
 
 1. MCAL
 * GPIO (External Interrupt Included In GPIO Driver)
-* Timer (Not Included Yet)
-* ADC (Not Included Yet)
+* Timer
+* ADC
 * I2C
 * SPI 
 * UART
-
+* External EEPROM
 
 2. HAL
 * Keypad
 * LCD
-* External EEPROM (Not Included Yet)
 
 ## Contact
 For any inquiries, please contact the repository owner:

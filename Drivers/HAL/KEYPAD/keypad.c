@@ -11,9 +11,7 @@
  =============================================================================================*/
 
 #include "keypad.h"
-#include"atmega32.h"
 #include"gpio.h"
-#include "util/delay.h"
 
 
 

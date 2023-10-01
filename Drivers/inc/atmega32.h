@@ -21,6 +21,7 @@
 #include "avr/io.h"
 #include "std_types.h"
 #include"stdlib.h"
+#include "util/delay.h"
 
 /*===============================================================================
  *           		   Global Interrupt Enable/Disable Macros 	 	             *

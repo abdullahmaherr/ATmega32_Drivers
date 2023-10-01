@@ -58,7 +58,7 @@ typedef enum
 typedef enum
 {
 	INVALIDARGUMENT,
-	OVERFLOW
+	OVERFLOW,
 }Error;
 
 #define NULL_PTR ((void*)0)
