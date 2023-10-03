@@ -16,11 +16,11 @@ The following drivers are included in this repository:
 * I2C
 * SPI 
 * UART
-* External EEPROM
 
 2. HAL
 * Keypad
 * LCD
+* External EEPROM
 
 ## Contact
 For any inquiries, please contact the repository owner:
