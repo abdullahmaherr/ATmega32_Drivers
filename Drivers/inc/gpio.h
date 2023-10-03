@@ -119,32 +119,37 @@ void MCAL_GPIO_WritePort(uint8_t PORTx, uint8_t a_Value);
  * Note           : None																	*/
 void MCAL_GPIO_PortInit(uint8_t PORTx, uint8_t Direction);
 
+
+
 /**===============================================================================
  * Function Name  : MCAL_GPIO_INT0Init.
  * Brief          : Function To Initialization The External Interrupt 0.
  * Parameter (in) : Interrupt Trigger Case.
  * Parameter (in) : Enable/Disable Interrupt Mask.
+ * Parameter (in) : Pointer to ISR0 Function.
  * Return         : None.
  * Note           : Must To Enable The Global Interrupt Before Using It.					*/
-void MCAL_GPIO_INT0Init(uint8_t a_triggerCase, uint8_t a_IntMask);
+void MCAL_GPIO_INT0Init(uint8_t a_triggerCase, uint8_t a_IntMask, void(*p_ISR0)(void));
 
 /**===============================================================================
  * Function Name  : MCAL_GPIO_INT1Init.
  * Brief          : Function To Initialization The External Interrupt 1.
  * Parameter (in) : Interrupt Trigger Case.
  * Parameter (in) : Enable/Disable Interrupt Mask.
+ * Parameter (in) : Pointer to ISR1 Function.
  * Return         : None.
  * Note           : Must To Enable The Global Interrupt Before Using It.					*/
-void MCAL_GPIO_INT1Init(uint8_t a_triggerCase, uint8_t a_IntMask);
+void MCAL_GPIO_INT1Init(uint8_t a_triggerCase, uint8_t a_IntMask, void(*p_ISR1)(void));
 
 /**===============================================================================
  * Function Name  : MCAL_GPIO_INT2Init.
  * Brief          : Function To Initialization The External Interrupt 2.
  * Parameter (in) : Interrupt Trigger Case.
  * Parameter (in) : Enable/Disable Interrupt Mask.
+ * Parameter (in) : Pointer to ISR2 Function.
  * Return         : None.
  * Note           : Must To Enable The Global Interrupt Before Using It.					*/
-void MCAL_GPIO_INT2Init(uint8_t a_triggerCase, uint8_t a_IntMask);
+void MCAL_GPIO_INT2Init(uint8_t a_triggerCase, uint8_t a_IntMask, void(*p_ISR2)(void));
 
 
 #endif /* INC_GPIO_H_ */
