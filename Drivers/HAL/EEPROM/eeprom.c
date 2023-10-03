@@ -68,12 +68,12 @@ uint8_t MCAL_EEPROM_ReadByte(uint16_t a_address,uint8_t *p_buff)
 
 	/* Repeat Starting To Read From EEPROM*/
 	MCAL_I2C_Start();
-	if(MCAL_I2C_GetStatus() != I2C_START)
+	if(MCAL_I2C_GetStatus() != I2C_REP_START)
 		return FAILED;
 
 	/* Send The Device Address */
 	MCAL_I2C_WriteByte((uint8_t)((0xA0) | ((a_address & 0x0700) >> 7) | 1)); /* Sending Most Significant 3-Bits of Byte Address with Device address (Reading)*/
-	if(MCAL_I2C_GetStatus() != I2C_SLA_W_ACK)
+	if(MCAL_I2C_GetStatus() != I2C_SLA_R_ACK)
 		return FAILED;
 
 	/* Reading The Byte With NACK*/
