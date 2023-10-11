@@ -14,9 +14,6 @@
 #define INC_GPIO_H_
 
 
-#define LOGIC_HIGH (1u)
-#define LOGIC_LOW (0u)
-
 /*===============================================================================
  *                                Includes                                       *
  ================================================================================*/
@@ -64,6 +61,11 @@
 /* @ref INT_MASK_DEFINE */
 #define INT_MASK_DISABLE					0
 #define INT_MASK_ENABLE						1
+
+
+
+#define LOGIC_HIGH (1u)
+#define LOGIC_LOW (0u)
 /*===============================================================================
  *                                	   APIs 		   		                     *
  ================================================================================*/
@@ -126,27 +128,30 @@ void MCAL_GPIO_PortInit(uint8_t PORTx, uint8_t Direction);
  * Brief          : Function To Initialization The External Interrupt 0.
  * Parameter (in) : Interrupt Trigger Case.
  * Parameter (in) : Enable/Disable Interrupt Mask.
+ * Parameter (in) : Address Of ISR Function .
  * Return         : None.
  * Note           : Must To Enable The Global Interrupt Before Using It.					*/
-void MCAL_GPIO_INT0Init(uint8_t a_triggerCase, uint8_t a_IntMask);
+void MCAL_GPIO_INT0Init(uint8_t a_triggerCase, uint8_t a_IntMask,void (*p_ISR0)(void));
 
 /**===============================================================================
  * Function Name  : MCAL_GPIO_INT1Init.
  * Brief          : Function To Initialization The External Interrupt 1.
  * Parameter (in) : Interrupt Trigger Case.
  * Parameter (in) : Enable/Disable Interrupt Mask.
+ * Parameter (in) : Address Of ISR Function .
  * Return         : None.
  * Note           : Must To Enable The Global Interrupt Before Using It.					*/
-void MCAL_GPIO_INT1Init(uint8_t a_triggerCase, uint8_t a_IntMask);
+void MCAL_GPIO_INT1Init(uint8_t a_triggerCase, uint8_t a_IntMask,void (*p_ISR1)(void));
 
 /**===============================================================================
  * Function Name  : MCAL_GPIO_INT2Init.
  * Brief          : Function To Initialization The External Interrupt 2.
  * Parameter (in) : Interrupt Trigger Case.
  * Parameter (in) : Enable/Disable Interrupt Mask.
+ * Parameter (in) : Address Of ISR Function .
  * Return         : None.
  * Note           : Must To Enable The Global Interrupt Before Using It.					*/
-void MCAL_GPIO_INT2Init(uint8_t a_triggerCase, uint8_t a_IntMask);
+void MCAL_GPIO_INT2Init(uint8_t a_triggerCase, uint8_t a_IntMask,void (*p_ISR2)(void));
 
 
 #endif /* INC_GPIO_H_ */

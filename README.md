@@ -11,7 +11,7 @@ The following drivers are included in this repository:
 
 1. MCAL
 * GPIO (External Interrupt Included In GPIO Driver)
-* Timer
+* Timer (Timer0, Timer1, WDT)
 * ADC
 * I2C
 * SPI 

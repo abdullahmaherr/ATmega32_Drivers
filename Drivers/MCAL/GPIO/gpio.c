@@ -14,13 +14,14 @@
  *                                Includes                                       *
  ================================================================================*/
 #include "gpio.h"
+#include "avr/io.h"
 
 
 /*===============================================================================
  *                              Global Variables                                 *
  ================================================================================*/
 
-//void (*gp_CallBak[3])(void);
+void (*gp_CallBack[3])(void);
 
 /*===============================================================================
  *                              API Definitions                                  *
@@ -300,7 +301,7 @@ void MCAL_GPIO_WritePort(uint8_t PORTx, uint8_t a_Value)
 	}
 }
 
-void MCAL_GPIO_INT0Init(uint8_t a_triggerCase, uint8_t a_IntMask)
+void MCAL_GPIO_INT0Init(uint8_t a_triggerCase, uint8_t a_IntMask,void (*p_ISR0)(void))
 {
 	/*Configure PORTD PIN2 as Input for INT1*/
 	DDRD &= (~(1<<PD2));
@@ -308,6 +309,8 @@ void MCAL_GPIO_INT0Init(uint8_t a_triggerCase, uint8_t a_IntMask)
 	/*Configure Trigger Case if Raising or Failing or Both*/
 	MCUCR |= (a_triggerCase & 0x03);
 
+	/*Assign The CallBack Function With The User's ISR*/
+	gp_CallBack[0] = p_ISR0;
 
 	/*Enable/Disable MASK INT1*/
 	switch(a_IntMask)
@@ -319,7 +322,7 @@ void MCAL_GPIO_INT0Init(uint8_t a_triggerCase, uint8_t a_IntMask)
 	}
 }
 
-void MCAL_GPIO_INT1Init(uint8_t a_triggerCase, uint8_t a_IntMask)
+void MCAL_GPIO_INT1Init(uint8_t a_triggerCase, uint8_t a_IntMask,void (*p_ISR1)(void))
 {
 	/*Configure PORTD PIN3 as Input for INT0*/
 	DDRD &= (~(1<<PD3));
@@ -327,6 +330,8 @@ void MCAL_GPIO_INT1Init(uint8_t a_triggerCase, uint8_t a_IntMask)
 	/*Configure Trigger Case if Raising or Failing or Both*/
 	MCUCR |= ((a_triggerCase & 0x03) << 2);
 
+	/*Assign The CallBack Function With The User's ISR*/
+	gp_CallBack[1] = p_ISR1;
 
 	/*Enable/Disable MASK INT0*/
 	switch(a_IntMask)
@@ -338,7 +343,7 @@ void MCAL_GPIO_INT1Init(uint8_t a_triggerCase, uint8_t a_IntMask)
 	}
 }
 
-void MCAL_GPIO_INT2Init(uint8_t a_triggerCase, uint8_t a_IntMask)
+void MCAL_GPIO_INT2Init(uint8_t a_triggerCase, uint8_t a_IntMask,void (*p_ISR2)(void))
 {
 	/*Configure PORTB PIN2 as Input for INT2*/
 	DDRB &= (~(1<<PB2));
@@ -354,6 +359,8 @@ void MCAL_GPIO_INT2Init(uint8_t a_triggerCase, uint8_t a_IntMask)
 		return;
 	}
 
+	/*Assign The CallBack Function With The User's ISR*/
+	gp_CallBack[2] = p_ISR2;
 
 	/*Enable/Disable MASK INT2*/
 	switch(a_IntMask)
@@ -368,21 +375,21 @@ void MCAL_GPIO_INT2Init(uint8_t a_triggerCase, uint8_t a_IntMask)
 
 /*===============================================================================
  *                       		 ISR Functions  		                         *
- ================================================================================
+ ================================================================================*/
 ISR(INT0_vect)
 {
-
+	(*gp_CallBack[0])();
 }
 
 
 ISR(INT1_vect)
 {
-
+	(*gp_CallBack[1])();
 }
 
 
 ISR(INT2_vect)
 {
-
+	(*gp_CallBack[2])();
 }
-*/
+
