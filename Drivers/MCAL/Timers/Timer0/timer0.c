@@ -44,20 +44,20 @@ void MCAL_TIMER0_Init(TIMER0_Config_t *p_TIMER0_Config)
 	}
 
 	/* Assign ISR with C function */
-	gp_CallBack = p_TIMER0_Config->Timer_ISR;
+	gp_CallBack = p_TIMER0_Config->p_Timer_ISR;
 }
 
 
 void MCAL_TIMER0_Stop(void)
 {
-	/* Stop Tomer0 by Clearing Prescaler */
+	/* Stop Timer0 by Clearing Prescaler */
 	TCCR0 &= (~(0x07));
 }
 
 
 void MCAL_TIMER0_Resume(void)
 {
-	/* Resume Tomer0 by Setting Prescaler */
+	/* Resume Timer0 by Setting Prescaler */
 	TCCR0 |= (g_TIMER0_Config.Timer_Clock);
 }
 
