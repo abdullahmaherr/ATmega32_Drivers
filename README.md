@@ -25,8 +25,5 @@ The following drivers are included in this repository:
 * External EEPROM
 
 ## Contact
-For any inquiries, please contact the repository owner:
 * Email: abdullahhegazi10@gmail.com
 * Linked in: https://www.linkedin.com/in/abdullahmaher-10a10m1010/
-
-Enjoy working with the ATmega32.
