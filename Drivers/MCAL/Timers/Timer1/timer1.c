@@ -21,7 +21,7 @@
  *                              Global Variables                                 *
  ================================================================================*/
 
-void (* gp_CallBack[2])(void);  /* Global Pointer To Assign ISRs */
+void (* gp_CallBack)(void);  /* Global Pointer To Assign ISRs */
 
 
 TIMER1_Config_t g_TIMER1_Config;
@@ -47,8 +47,7 @@ void MCAL_TIMER1_Init(TIMER1_Config_t *p_TIMER1_Config)
 	}
 
 	/* Assign ISR with C function */
-	gp_CallBack[0] = (p_TIMER1_Config->p_Timer_ISR[0]);
-	gp_CallBack[1] = (p_TIMER1_Config->p_Timer_ISR[1]);
+	gp_CallBack = (p_TIMER1_Config->p_Timer_ISR);
 }
 
 
@@ -66,18 +65,10 @@ void MCAL_TIMER1_Resume(void)
 }
 
 
-void MCAL_TIMER1_SetCompareValue(uint8_t a_CompReg, uint16_t a_TicksNumber)
+void MCAL_TIMER1_SetCompareValue(uint16_t a_TicksNumber)
 {
 	/* Setting The Compare Value */
-	switch(a_CompReg)
-	{
-	case TIMER1_CTC_COMPARE_VALUE_A:
-		OCR1A = a_TicksNumber; break;
-	case TIMER1_CTC_COMPARE_VALUE_B:
-		OCR1B = a_TicksNumber; break;
-	default:
-		break;
-	}
+	OCR1A = a_TicksNumber;
 }
 
 
@@ -93,16 +84,12 @@ void MCAL_TIMER1_SetCounter(uint16_t a_Counter)
  ================================================================================*/
 ISR(TIMER1_OVF_vect)
 {
-	(*gp_CallBack[0])();
+	(*gp_CallBack)();
 }
 
 
 ISR(TIMER1_COMPA_vect)
 {
-	(*gp_CallBack[0])();
+	(*gp_CallBack)();
 }
 
-ISR(TIMER1_COMPB_vect)
-{
-	(*gp_CallBack[1])();
-}

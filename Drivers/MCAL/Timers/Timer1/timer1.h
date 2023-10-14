@@ -30,9 +30,7 @@ typedef struct
 
 	uint8_t Timer_IntMask;			/* Specifies The Timer Interrupt Mask Regarding to  @ref TIMER1 Enable/Disabled*/
 
-	void (*p_Timer_ISR[2])(void);		/* SET The Call Back Function That Will Be Called In ISR
-										For OVF or CTC COMPA interrupt assign Timer_ISR[0]
-										For CTC COMPB interrupt assign Timer_ISR[1]				*/
+	void (*p_Timer_ISR)(void);		/* SET The Call Back Function That Will Be Called In ISR */
 
 }TIMER1_Config_t;
 
@@ -97,11 +95,10 @@ void MCAL_TIMER1_Resume(void);
 /**===============================================================================
  * Function Name  : MCAL_TIMER1_SetCompareValue.
  * Brief          : Function To Set Timer1 Compare Value In CTC Mode.
- * Parameter (in) : Compare Register1 or Register2 .
  * Parameter (in) : Compare Value.
  * Return         : None.
  * Note           : None.																	*/
-void MCAL_TIMER1_SetCompareValue(uint8_t a_CompReg, uint16_t a_TicksNumber);
+void MCAL_TIMER1_SetCompareValue(uint16_t a_TicksNumber);
 
 /**===============================================================================
  * Function Name  : MCAL_TIMER1_SetCounter.
