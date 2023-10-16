@@ -23,6 +23,7 @@ The following drivers are included in this repository:
 * Keypad
 * LCD
 * External EEPROM
+* Motor (DC, Servo, Stepper)
 
 ## Contact
 * Email: abdullahhegazi10@gmail.com
