@@ -37,7 +37,7 @@
 #define PWM_CLK_EXT_FAILING  			(6U)
 #define PWM_CLK_EXT_RAISING  			(7U)
 
- /* Pin Output Selection for Timer1 */
+
 #define PWM_OC1A 						(0x80U)
 #define PWM_OC1B 						(0x20U)
 #define PWM_OC1AB 						(0xA0U)
@@ -57,7 +57,7 @@ void MCAL_TIMER0_PWMInit(uint8_t a_prescaler);
  * Parameter (in) :  OC1A or OC1B.
  * Return         : None.
  * Note           : Timer2 will be used in FAST PWM, Non inverting, F_PWM = (F_CPU)/(TOP*N) . */
-void MCAL_TIMER1_PWMInit(uint8_t a_prescaler,uint8_t a_top, uint8_t a_pin);
+void MCAL_TIMER1_PWMInit(uint8_t a_prescaler,uint16_t a_top, uint8_t a_pin);
 
 /**===============================================================================
  * Function Name  : MCAL_TIMER2_PWMInit.
@@ -81,7 +81,7 @@ void MCAL_TIMER0_PWMSetDuty(uint8_t a_duty);
  * Parameter (in) : The Required Duty Cycle.
  * Return         : None.
  * Note           : None.																		*/
-void MCAL_TIMER1_PWMSetDuty(uint8_t a_duty, uint8_t a_pin);
+void MCAL_TIMER1_PWMSetDuty(uint16_t a_duty, uint8_t a_pin);
 
 /**===============================================================================
  * Function Name  : MCAL_TIMER2_PWMInit.

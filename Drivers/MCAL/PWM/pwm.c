@@ -37,7 +37,7 @@ void MCAL_TIMER0_PWMInit(uint8_t a_prescaler)
 }
 
 
-void MCAL_TIMER1_PWMInit(uint8_t a_prescaler,uint8_t a_top, uint8_t a_pin)
+void MCAL_TIMER1_PWMInit(uint8_t a_prescaler,uint16_t a_top, uint8_t a_pin)
 {
 	/* Set The Timer Initial Value to 0 */
 	TCNT1 = 0;
@@ -87,7 +87,7 @@ void MCAL_TIMER0_PWMSetDuty(uint8_t a_duty)
 }
 
 
-void MCAL_TIMER1_PWMSetDuty(uint8_t a_duty, uint8_t a_pin)
+void MCAL_TIMER1_PWMSetDuty(uint16_t a_duty, uint8_t a_pin)
 {
 	switch(a_pin)
 	{
