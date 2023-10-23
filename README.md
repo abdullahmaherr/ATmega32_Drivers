@@ -24,6 +24,7 @@ The following drivers are included in this repository:
 * LCD
 * External EEPROM
 * Motor (DC, Servo, Stepper)
+* Sensors (Temperature, Distance, )
 
 ## Contact
 * Email: abdullahhegazi10@gmail.com
