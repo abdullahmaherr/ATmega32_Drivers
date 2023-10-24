@@ -25,13 +25,13 @@
  *                              API Definitions                                  *
  ================================================================================*/
 
-void MCAL_ADC_Init(uint8_t a_VoltRef, uint8_t a_Prescale)
+void MCAL_ADC_Init(ADC_Config_t *p_Config)
 {
 	/* Select The Vref Source, the result is right adjusted, channel 0 as initialization */
-	ADMUX = ((a_VoltRef) & (0xC0));
+	ADMUX = ((p_Config->VoltRef) & (0xC0));
 
 	/* Select The Desired Prescaler, Enable ADC, Disable Auto Trigger and Interrupt */
-	ADCSRA = (a_Prescale) | (1<<ADEN);
+	ADCSRA = (p_Config->Prescaler) | (1<<ADEN);
 }
 
 uint16_t MCAL_ADC_ReadChannel(uint8_t a_channelx)
