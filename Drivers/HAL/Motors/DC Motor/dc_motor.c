@@ -5,7 +5,7 @@
  *
  * Author: Abdullah Maher
  *
- * Description : Source File Of ATmega32 Motors Driver
+ * Description : Source File Of Motors Driver
  *
  * Created on: May 1, 2023
  =============================================================================================*/
@@ -13,7 +13,7 @@
 /*===============================================================================
  *                                Includes                                       *
  ================================================================================*/
-#include <dc_motor.h>
+#include "dc_motor.h"
 #include "gpio.h"
 #include "pwm.h"
 
@@ -37,11 +37,24 @@ void HAL_DCMotor_GPIO_Init(uint8_t a_Port,uint8_t a_Pin)
 }
 
 
-void HAL_DCMotor_Start(uint8_t a_Port, uint8_t a_Pin)
+void HAL_DCMotor_Rotate(uint8_t a_Port, uint8_t a_Pin, uint8_t a_Direction)
 {
-	/* Start Running The Motor */
-	MCAL_GPIO_WritePin(a_Port, a_Pin, LOGIC_HIGH);
-	MCAL_GPIO_WritePin(a_Port, (a_Pin+1), LOGIC_LOW);
+	/* Assign The Motor State */
+	if(a_Direction == DCMOTOR_ROT_CW)
+	{
+		MCAL_GPIO_WritePin(a_Port, a_Pin, LOGIC_HIGH);
+		MCAL_GPIO_WritePin(a_Port, (a_Pin+1), LOGIC_LOW);
+	}
+	else if(a_Direction == DCMOTOR_ROT_CCW)
+	{
+		MCAL_GPIO_WritePin(a_Port, a_Pin, LOGIC_LOW);
+		MCAL_GPIO_WritePin(a_Port, (a_Pin+1), LOGIC_HIGH);
+	}
+	else if(a_Direction == DCMOTOR_ROT_STOP)
+	{
+		MCAL_GPIO_WritePin(a_Port, a_Pin, LOGIC_LOW);
+		MCAL_GPIO_WritePin(a_Port, (a_Pin+1), LOGIC_LOW);
+	}
 }
 
 
@@ -66,9 +79,3 @@ void HAL_DCMotor_Speed(uint8_t a_pwmx,uint8_t a_speed)
 
 }
 
-
-void HAL_DCMotor_Stop(uint8_t a_Port,uint8_t a_Pin)
-{
-	MCAL_GPIO_WritePin(a_Port, a_Pin, LOGIC_LOW);
-	MCAL_GPIO_WritePin(a_Port, (a_Pin+1), LOGIC_LOW);
-}
