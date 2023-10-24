@@ -34,7 +34,7 @@ uint8_t HAL_LM35_GetTemp(void)
 
 	adc_value = MCAL_ADC_ReadChannel(LM35_CHANNEL);
 
-	temp = (uint8_t)(((uint32_t)adc_value * LM35_MAX_TEMP * 5)/(1023 * LM35_MAX_VOLT));
+	temp = (uint8_t)(((uint32_t)adc_value * LM35_MAX_TEMP * LM35_ADC_Vref_Value)/(LM35_ADC_MAX_RES * LM35_MAX_VOLT));
 
 	return temp;
 

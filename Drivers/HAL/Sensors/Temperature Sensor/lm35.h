@@ -24,8 +24,12 @@
 
 /* Select Sensor Channel Temperature ADC_CHx where x = 0 to 7*/
 #define LM35_CHANNEL ADC_CH0
-#define LM35_MAX_VOLT 1.5
-#define LM35_MAX_TEMP 150
+
+/* Select The Voltage Reference Value */
+#define LM35_ADC_MAX_RES 		1023
+#define LM35_ADC_Vref_Value	 	5
+#define LM35_MAX_VOLT 			1.5
+#define LM35_MAX_TEMP 			150
 
 
 /*===============================================================================
