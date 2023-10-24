@@ -72,7 +72,7 @@ void MCAL_TIMER2_PWMInit(uint8_t a_prescaler);
  * Brief          : Function To Initialize The Required Duty Cycle.
  * Parameter (in) : The Required Duty Cycle.
  * Return         : None.
- * Note           : None.																	*/
+ * Note           : The Input Scale is 0-100.																	*/
 void MCAL_TIMER0_PWMSetDuty(uint8_t a_duty);
 
 /**===============================================================================
@@ -80,7 +80,7 @@ void MCAL_TIMER0_PWMSetDuty(uint8_t a_duty);
  * Brief          : Function To Initialize The Required Duty Cycle.
  * Parameter (in) : The Required Duty Cycle.
  * Return         : None.
- * Note           : None.																		*/
+ * Note           : The Input Scale is 0-100.																		*/
 void MCAL_TIMER1_PWMSetDuty(uint16_t a_duty, uint8_t a_pin);
 
 /**===============================================================================
@@ -88,7 +88,7 @@ void MCAL_TIMER1_PWMSetDuty(uint16_t a_duty, uint8_t a_pin);
  * Brief          : Function To Initialize The Required Duty Cycle.
  * Parameter (in) : The Required Duty Cycle.
  * Return         : None.
- * Note           : None.																	*/
+ * Note           : The Input Scale is 0-100.																	*/
 void MCAL_TIMER2_PWMSetDuty(uint8_t a_duty);
 
 

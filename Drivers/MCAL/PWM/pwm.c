@@ -83,21 +83,26 @@ void MCAL_TIMER2_PWMInit(uint8_t a_prescaler)
 
 void MCAL_TIMER0_PWMSetDuty(uint8_t a_duty)
 {
-	OCR0 = a_duty;
+	uint8_t OCR_value = 0;
+	OCR_value = (((float32)a_duty/100)*255);
+	OCR0 = OCR_value;
 }
 
 
 void MCAL_TIMER1_PWMSetDuty(uint16_t a_duty, uint8_t a_pin)
 {
+	uint16_t OCR_value = 0;
+	OCR_value = (((float32)a_duty/100)*65535);
+
 	switch(a_pin)
 	{
 	case PWM_OC1A:
-		OCR1A = a_duty; break;
+		OCR1A = OCR_value; break;
 	case PWM_OC1B:
-		OCR1B = a_duty; break;
+		OCR1B = OCR_value; break;
 	case PWM_OC1AB:
-		OCR1B = a_duty;
-		OCR1A = a_duty;
+		OCR1B = OCR_value;
+		OCR1A = OCR_value;
 		break;
 	}
 }
@@ -105,5 +110,7 @@ void MCAL_TIMER1_PWMSetDuty(uint16_t a_duty, uint8_t a_pin)
 
 void MCAL_TIMER2_PWMSetDuty(uint8_t a_duty)
 {
-	OCR2 = a_duty;
+	uint8_t OCR_value = 0;
+	OCR_value = (((float32)a_duty/100)*255);
+	OCR2 = OCR_value;
 }
