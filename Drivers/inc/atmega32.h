@@ -20,8 +20,6 @@
 
 #include "avr/io.h"
 #include "std_types.h"
-#include"stdlib.h"
-
 /*===============================================================================
  *           		   Global Interrupt Enable/Disable Macros 	 	             *
  ================================================================================*/
@@ -41,6 +39,10 @@
 
 #ifndef FALSE
 #define FALSE (0u)
+#endif
+
+#ifndef F_CPU
+#define F_CPU 16000000UL
 #endif
 
 #define NULL_PTR ((void*)0)
@@ -69,7 +71,7 @@
 /* Rotate The Register Right By a specific Numbers Of Rotates*/
 #define ROL(REG,NUM) ((REG << NUM) | (REG >> (8-NUM)))
 
-/*Get Specific Value on BIT*/
+/* Write a Specific Value on BIT*/
 #define WRI_BIT(REG,BIT,DATA) ((REG) = (REG & (~(1<<BIT))) | (DATA<<BIT))
 
 
