@@ -15,7 +15,7 @@
 
 /* Unsigned Integer Data Types */
 typedef unsigned char								uint8_t;
-//typedef unsigned short int							uint16_t;
+typedef unsigned short int							uint16_t;
 typedef unsigned long int				 			uint32_t;
 typedef unsigned long long int						uint64_t;
 
@@ -61,7 +61,6 @@ typedef enum
 	OVERFLOW,
 }Error;
 
-#define NULL_PTR ((void*)0)
 
 
 #endif /* INC_STD_TYPES_H_ */
