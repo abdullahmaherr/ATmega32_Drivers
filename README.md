@@ -16,7 +16,7 @@ The following drivers are included in this repository:
 * ADC
 * I2C
 * SPI 
-* UART
+* USART
 
 
 2. HAL
