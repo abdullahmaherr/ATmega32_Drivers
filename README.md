@@ -24,7 +24,7 @@ The following drivers are included in this repository:
 * LCD
 * External EEPROM
 * Motor (DC, Servo, Stepper)
-* Sensors (Temperature, Distance(Ultrasonic), )
+* Sensors (LM35, Ultrasonic, )
 
 ## Contact
 * Email: abdullahhegazi10@gmail.com
