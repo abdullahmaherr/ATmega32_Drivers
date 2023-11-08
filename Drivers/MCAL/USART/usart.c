@@ -47,7 +47,7 @@ ISR(USART_TXC_vect)
 void MCAL_USART_Init(USART_Config_t *p_USART_Config)
 {
 	/* Configure Interrupt, TXRX Enabled */
-	UCSRB = (1<<RXEN) | (1<<TXEN) | (p_USART_Config->USART_Interrupt);
+	UCSRB = (1<<RXEN) | (1<<TXEN) | (p_USART_Config->USART_IRQ);
 
 	/* Configure Mode, Parity, Stop, Data Bits */
 	UCSRC = (1<<URSEL) | (p_USART_Config->USART_Mode) | (p_USART_Config->USART_ParityBit) | (p_USART_Config->USART_StopBits);
@@ -66,7 +66,7 @@ void MCAL_USART_Init(USART_Config_t *p_USART_Config)
 	UBRRL = (p_USART_Config->USART_BaudRate);
 
 	/* Assign ISR with C function */
-	if(p_USART_Config->USART_Interrupt == USART_RTXC_MASK_DISABLE)
+	if(p_USART_Config->USART_IRQ == USART_RTXC_IRQ_DISABLE)
 	{
 		CLEAR_BIT(UCSRB,RXCIE);
 		CLEAR_BIT(UCSRB,TXCIE);
@@ -89,7 +89,7 @@ void MCAL_USART_Deinit(void)
 void MCAL_USART_TX(uint16_t a_data,uint8_t a_Polling)
 {
 	/* Polling Mechanism */
-	if(a_Polling)
+	if(a_Polling == USART_POLLING_ENABLE)
 	{
 		/* Wait Until The Buffer Is Empty */
 		while(BIT_IS_CLEAR(UCSRA,UDRE));
@@ -111,7 +111,7 @@ uint16_t MCAL_USART_RX(uint8_t a_Polling)
 	uint16_t buff = 0;
 
 	/* Polling Mechanism */
-	if(a_Polling)
+	if(a_Polling == USART_POLLING_ENABLE)
 	{
 		/*Wait Until There Are Unread Data is Received*/
 		while(BIT_IS_CLEAR(UCSRA,RXC));

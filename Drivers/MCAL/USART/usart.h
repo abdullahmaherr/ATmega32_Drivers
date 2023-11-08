@@ -36,7 +36,7 @@ typedef struct
 
 	uint8_t USART_ParityBit;	/* Specifies The USART ParityBit Regarding to @ref ParityBit Mode*/
 
-	uint8_t USART_Interrupt;	/* Specifies The USART Interrupt Mask Regarding to  @ref USART Interrupt Enable/Disable */
+	uint8_t USART_IRQ;	/* Specifies The USART Interrupt Mask Regarding to  @ref USART Interrupt Enable/Disable */
 
 	void(*p_USART_ISR)(void);	/* SET The Call Back Function That Will Be Called In ISR */
 
@@ -87,14 +87,17 @@ typedef struct
 #define USART_STOP_BIT_2					(0x08U)
 
 /* @ref USART Interrupt Enable/Disable */
-#define USART_RTXC_MASK_DISABLE				(0x00)
-#define USART_RXC_MASK_ENABLE				(0x80)
-#define USART_TXC_MASK_ENABLE				(0x40)
-#define USART_RTXC_MASK_ENABLE				(0xC0)
+#define USART_RTXC_IRQ_DISABLE				(0x00)
+#define USART_RXC_IRQ_ENABLE				(0x80)
+#define USART_TXC_IRQ_ENABLE				(0x40)
+#define USART_RTXC_IRQ_ENABLE				(0xC0)
 
 /*@ref Polling Enable/Disable */
-#define USART_POLLING_DISABLE				0
-#define USART_POLLING_ENABLE				1
+typedef enum
+{
+	USART_POLLING_DISABLE,
+	USART_POLLING_ENABLE
+}USART_Polling_Mecanism;
 
 /*===============================================================================
  *                                	   APIs 		   		                     *
