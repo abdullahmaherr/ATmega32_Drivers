@@ -17,19 +17,21 @@
  *                                Includes                                       *
  ================================================================================*/
 #include "atmega32.h"
-
+#include "std_types.h"
 
 /*===============================================================================
- *                      			Macros    				                     *
+ *                            User Type Definitions                              *
  ================================================================================*/
 
-#ifndef SUCCEDED
-#define SUCCEDED (1u)
-#endif
+typedef enum
+{
+	FAILED,
+	SUCCEDED
+}EEPROM_Status;
 
-#ifndef FAILED
-#define FAILED (0u)
-#endif
+/*===============================================================================
+ *                       Macros Configuration References                         *
+ ================================================================================*/
 
 /*===============================================================================
  *                                	   APIs 		   		                     *
@@ -42,7 +44,7 @@
  * Parameter (in) : The Byte To Write It.
  * Return         : Status.
  * Note           : None.																	*/
-uint8_t MCAL_EEPROM_WriteByte(uint16_t a_address,uint8_t a_data);
+uint8_t MCAL_EEPROM_writeByte(uint16_t a_address,uint8_t a_data);
 
 /**===============================================================================
  * Function Name  : MCAL_EEPROM_ReadByte.
@@ -51,6 +53,6 @@ uint8_t MCAL_EEPROM_WriteByte(uint16_t a_address,uint8_t a_data);
  * Parameter (in) : Pointer To Buffer.
  * Return         : Status.
  * Note           : None.																	*/
-uint8_t MCAL_EEPROM_ReadByte(uint16_t a_address,uint8_t *p_buff);
+uint8_t MCAL_EEPROM_readByte(uint16_t a_address,uint8_t *p_buff);
 
 #endif /* INC_EEPROM_H_ */
