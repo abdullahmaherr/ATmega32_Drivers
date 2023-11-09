@@ -14,7 +14,7 @@ The following drivers are included in this repository:
 * Timer (Timer0, Timer1, WDT)
 * PWM
 * ADC
-* I2C
+* TWI
 * SPI 
 * USART
 

@@ -1,11 +1,11 @@
 /*============================================================================================
- * Module : I2C
+ * Module : TWI
  *
- * File Name : i2c.c
+ * File Name : twi.c
  *
  * Author: Abdullah Maher
  *
- * Description : Source File Of ATmega32 I2C Driver
+ * Description : Source File Of ATmega32 TWI Driver
  *
  * Created on: May 1, 2023
  =============================================================================================*/
@@ -13,30 +13,30 @@
 /*===============================================================================
  *                                Includes                                       *
  ================================================================================*/
-#include "i2c.h"
+#include "twi.h"
 #include "gpio.h"
 
 /*===============================================================================
  *                              API Definitions                                  *
  ================================================================================*/
 
-void MCAL_I2C_Init(void)
+void MCAL_TWI_init(TWI_Config_t *p_TWI_Config)
 {
 	/*
 	 * SCL Frequency = ((F_CPU) / (16 + (2 * TWBR * 4 ^ TWPS)))
 	 * For F_CPU = 8Mhz We Get Bit Rate 400Khz                 */
-	TWBR = 0x02;
-	TWSR = 0x00;/* TWPS = 00 */
+	TWBR = p_TWI_Config->TWI_BitRate;
+	TWSR |= p_TWI_Config->TWI_Prescaler;
 
 	/* Addressing The MCU */
-	TWAR = ADDRESS_MCU;
+	TWAR = p_TWI_Config->TWI_DeviceAddress;
 
-	/* Enable The I2C */
+	/* Enable The TWI */
 	TWCR = (1<<TWEN);
 }
 
 
-void MCAL_I2C_Start(void)
+void MCAL_TWI_start(void)
 {
 	/*Clear Interrupt Flag, Send Start Condition*/
 	TWCR = (1<<TWEN) | (1<<TWINT) | (1<<TWSTA);
@@ -46,14 +46,14 @@ void MCAL_I2C_Start(void)
 }
 
 
-void MCAL_I2C_Stop(void)
+void MCAL_TWI_stop(void)
 {
 	/*Clear Interrupt Flag, Send Stop Condition*/
 	TWCR = (1<<TWEN) | (1<<TWINT) | (1<<TWSTO);
 }
 
 
-void MCAL_I2C_WriteByte(uint8_t a_data)
+void MCAL_TWI_writeByte(uint8_t a_data)
 {
 	/* Assign The TWDR with Data Or Address To Be Transmitted */
 	TWDR = a_data;
@@ -66,7 +66,7 @@ void MCAL_I2C_WriteByte(uint8_t a_data)
 }
 
 
-uint8_t MCAL_I2C_ReadByte(uint8_t a_ack)
+uint8_t MCAL_TWI_readByte(uint8_t a_ack)
 {
 	switch(a_ack)
 	{
@@ -86,7 +86,7 @@ uint8_t MCAL_I2C_ReadByte(uint8_t a_ack)
 }
 
 
-uint8_t MCAL_I2C_GetStatus(void)
+uint8_t MCAL_TWI_getStatus(void)
 {
 	uint8_t status;
 
