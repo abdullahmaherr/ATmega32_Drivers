@@ -38,21 +38,21 @@ typedef enum
  ================================================================================*/
 
 /**===============================================================================
- * Function Name  : MCAL_EEPROM_WriteByte.
+ * Function Name  : HAL_EEPROM_WriteByte.
  * Brief          : Function To Write Byte on The External EEPROM.
  * Parameter (in) : Address.
  * Parameter (in) : The Byte To Write It.
  * Return         : Status.
  * Note           : None.																	*/
-uint8_t MCAL_EEPROM_writeByte(uint16_t a_address,uint8_t a_data);
+uint8_t HAL_EEPROM_writeByte(uint16_t a_address,uint8_t a_data);
 
 /**===============================================================================
- * Function Name  : MCAL_EEPROM_ReadByte.
+ * Function Name  : HAL_EEPROM_ReadByte.
  * Brief          : Function To Read Byte From The External EEPROM.
  * Parameter (in) : Address.
  * Parameter (in) : Pointer To Buffer.
  * Return         : Status.
  * Note           : None.																	*/
-uint8_t MCAL_EEPROM_readByte(uint16_t a_address,uint8_t *p_buff);
+uint8_t HAL_EEPROM_readByte(uint16_t a_address,uint8_t *p_buff);
 
 #endif /* INC_EEPROM_H_ */

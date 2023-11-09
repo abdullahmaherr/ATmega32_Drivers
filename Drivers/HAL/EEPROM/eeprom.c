@@ -21,7 +21,7 @@
  *                              API Definitions                                  *
  ================================================================================*/
 
-uint8_t MCAL_EEPROM_writeByte(uint16_t a_address,uint8_t a_data)
+uint8_t HAL_EEPROM_writeByte(uint16_t a_address,uint8_t a_data)
 {
 	/* Starting I2C Communication */
 	MCAL_TWI_start();
@@ -49,7 +49,7 @@ uint8_t MCAL_EEPROM_writeByte(uint16_t a_address,uint8_t a_data)
 }
 
 
-uint8_t MCAL_EEPROM_readByte(uint16_t a_address,uint8_t *p_buff)
+uint8_t HAL_EEPROM_readByte(uint16_t a_address,uint8_t *p_buff)
 {
 	/* Starting TWI Communication */
 	MCAL_TWI_start();
