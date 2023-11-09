@@ -44,7 +44,7 @@ ISR(USART_TXC_vect)
  *                              API Definitions                                  *
  ================================================================================*/
 
-void MCAL_USART_Init(USART_Config_t *p_USART_Config)
+void MCAL_USART_init(USART_Config_t *p_USART_Config)
 {
 	/* Configure Interrupt, TXRX Enabled */
 	UCSRB = (1<<RXEN) | (1<<TXEN) | (p_USART_Config->USART_IRQ);
@@ -74,10 +74,11 @@ void MCAL_USART_Init(USART_Config_t *p_USART_Config)
 	}else
 	{
 		gp_CallBack = (p_USART_Config->p_USART_ISR);
+		SEI();
 	}
 }
 
-void MCAL_USART_Deinit(void)
+void MCAL_USART_deinit(void)
 {
 	/* Return all registers to default values */
 	UCSRA &= (~(0x43));

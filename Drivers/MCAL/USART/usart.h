@@ -110,7 +110,7 @@ typedef enum
  * Return         : None.
  * Note           : Asynchronous TX at Raising RX at Failing
   	  	  	  	    The Recommended Baud Rate 9600 															*/
-void MCAL_USART_Init(USART_Config_t *p_USART_Config);
+void MCAL_USART_init(USART_Config_t *p_USART_Config);
 
 /**===============================================================================
  * Function Name  : MCAL_USART_Deinit.
@@ -118,7 +118,7 @@ void MCAL_USART_Init(USART_Config_t *p_USART_Config);
  * Parameter (in) : None.
  * Return         : None.
  * Note           : None.																 */
-void MCAL_USART_Deinit(void);
+void MCAL_USART_deinit(void);
 
 /**===============================================================================
  * Function Name  : MCAL_USART_TX.
