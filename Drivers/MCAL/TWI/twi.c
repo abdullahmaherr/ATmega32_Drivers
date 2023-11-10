@@ -24,12 +24,12 @@ void MCAL_TWI_init(TWI_Config_t *p_TWI_Config)
 {
 	/*
 	 * SCL Frequency = ((F_CPU) / (16 + (2 * TWBR * 4 ^ TWPS)))
-	 * For F_CPU = 8Mhz We Get Bit Rate 400Khz                 */
+	 * For F_CPU = 8Mhz We Get Bit Rate 400Khz if BitRate = 2 and Prescaler is 1                 */
 	TWBR = p_TWI_Config->TWI_BitRate;
-	TWSR |= p_TWI_Config->TWI_Prescaler;
+	TWSR = p_TWI_Config->TWI_Prescaler;
 
 	/* Addressing The MCU */
-	TWAR = p_TWI_Config->TWI_DeviceAddress;
+	TWAR = ((p_TWI_Config->TWI_DeviceAddress)<<1);
 
 	/* Enable The TWI */
 	TWCR = (1<<TWEN);
