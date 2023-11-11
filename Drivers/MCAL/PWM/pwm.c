@@ -89,10 +89,10 @@ void MCAL_TIMER0_PWMSetDuty(uint8_t a_duty)
 }
 
 
-void MCAL_TIMER1_PWMSetDuty(uint16_t a_duty, uint8_t a_pin)
+void MCAL_TIMER1_PWMSetDuty(uint16_t a_top, uint8_t a_duty, uint8_t a_pin)
 {
 	uint16_t OCR_value = 0;
-	OCR_value = (((float32)a_duty/100)*65535);
+	OCR_value = (((float32)a_duty/100)*a_top);
 
 	switch(a_pin)
 	{

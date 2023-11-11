@@ -17,12 +17,12 @@
  *                                Includes                                       *
  ================================================================================*/
 #include "atmega32.h"
+#include "std_types.h"
 
 
 /*===============================================================================
  *                            User Type Definitions                              *
  ================================================================================*/
-
 
 /*===============================================================================
  *                       Macros Configuration References                         *
@@ -81,7 +81,7 @@ void MCAL_TIMER0_PWMSetDuty(uint8_t a_duty);
  * Parameter (in) : The Required Duty Cycle.
  * Return         : None.
  * Note           : The Input Scale is 0-100.																		*/
-void MCAL_TIMER1_PWMSetDuty(uint16_t a_duty, uint8_t a_pin);
+void MCAL_TIMER1_PWMSetDuty(uint16_t a_top, uint8_t a_duty, uint8_t a_pin);
 
 /**===============================================================================
  * Function Name  : MCAL_TIMER2_PWMInit.
