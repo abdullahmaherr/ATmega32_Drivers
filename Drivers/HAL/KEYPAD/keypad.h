@@ -17,7 +17,8 @@
  *                                Includes                                       *
  ================================================================================*/
 #include "atmega32.h"
-#include "gpio.h"
+#include "std_types.h"
+
 
 /*===============================================================================
  *                       Macros Configuration References                         *
@@ -36,8 +37,8 @@
 #define KEYPAD_COL_FIRST_PIN_ID		GPIO_PIN2
 
 /* Keypad button logic configurations */
-#define KEYPAD_BUTTON_PRESSED            LOGIC_LOW
-#define KEYPAD_BUTTON_RELEASED           LOGIC_HIGH
+#define KEYPAD_BUTTON_PRESSED            GPIO_CLEAR_PIN
+#define KEYPAD_BUTTON_RELEASED           GPIO_SET_PIN
 
 /*===============================================================================
  *                                	   APIs 		   		                     *
