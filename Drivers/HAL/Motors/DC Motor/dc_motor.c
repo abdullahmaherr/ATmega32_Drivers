@@ -42,18 +42,18 @@ void HAL_DCMotor_Rotate(uint8_t a_Port, uint8_t a_Pin, uint8_t a_Direction)
 	/* Assign The Motor State */
 	if(a_Direction == DCMOTOR_ROT_CW)
 	{
-		MCAL_GPIO_WritePin(a_Port, a_Pin, LOGIC_HIGH);
-		MCAL_GPIO_WritePin(a_Port, (a_Pin+1), LOGIC_LOW);
+		MCAL_GPIO_WritePin(a_Port, a_Pin, GPIO_SET_PIN);
+		MCAL_GPIO_WritePin(a_Port, (a_Pin+1), GPIO_CLEAR_PIN);
 	}
 	else if(a_Direction == DCMOTOR_ROT_CCW)
 	{
-		MCAL_GPIO_WritePin(a_Port, a_Pin, LOGIC_LOW);
-		MCAL_GPIO_WritePin(a_Port, (a_Pin+1), LOGIC_HIGH);
+		MCAL_GPIO_WritePin(a_Port, a_Pin, GPIO_CLEAR_PIN);
+		MCAL_GPIO_WritePin(a_Port, (a_Pin+1), GPIO_SET_PIN);
 	}
 	else if(a_Direction == DCMOTOR_ROT_STOP)
 	{
-		MCAL_GPIO_WritePin(a_Port, a_Pin, LOGIC_LOW);
-		MCAL_GPIO_WritePin(a_Port, (a_Pin+1), LOGIC_LOW);
+		MCAL_GPIO_WritePin(a_Port, a_Pin, GPIO_CLEAR_PIN);
+		MCAL_GPIO_WritePin(a_Port, (a_Pin+1), GPIO_CLEAR_PIN);
 	}
 }
 

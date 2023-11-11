@@ -17,6 +17,7 @@
  *                                Includes                                       *
  ================================================================================*/
 #include "atmega32.h"
+#include "std_types.h"
 
 
 /*===============================================================================
@@ -38,7 +39,7 @@
  * Parameter (in) : Pin Output @ref SERVO pin.
  * Return         : None.
  * Note           : Fcpu must to equal to 8Mhz.																	*/
-void HAL_Servo_Init(uint8_t a_OC1x);
+void HAL_Servo_init(uint8_t a_OC1x);
 
 /**===============================================================================
  * Function Name  : HAL_Servo_Init.
