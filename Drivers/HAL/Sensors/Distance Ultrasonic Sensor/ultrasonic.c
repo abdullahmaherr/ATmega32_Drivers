@@ -15,7 +15,7 @@
 #include "ultrasonic.h"
 #include "icu.h"
 #include "gpio.h"
-
+#include <util/delay.h>
 
 /*===============================================================================
  *                              Global Variables                                 *
@@ -104,7 +104,7 @@ uint16_t HAL_Ultrasonic_ReadDistance(void)
 static void HAL_Ultrasonic_Trigger(void)
 {
 	/* Trigger The Ultrasonic By Sending a 10us Pulse */
-	MCAL_GPIO_WritePin(ULTRASONIC_TRIG_PORT, ULTRASONIC_TRIG_PIN, LOGIC_HIGH);
+	MCAL_GPIO_WritePin(ULTRASONIC_TRIG_PORT, ULTRASONIC_TRIG_PIN, GPIO_SET_PIN);
 	_delay_us(10);
-	MCAL_GPIO_WritePin(ULTRASONIC_TRIG_PORT, ULTRASONIC_TRIG_PIN, LOGIC_LOW);
+	MCAL_GPIO_WritePin(ULTRASONIC_TRIG_PORT, ULTRASONIC_TRIG_PIN, GPIO_CLEAR_PIN);
 }
