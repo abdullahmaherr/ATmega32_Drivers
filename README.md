@@ -10,9 +10,11 @@ The drivers in this repository provide a high-level interface to the peripherals
 The following drivers are included in this repository:
 
 1. MCAL
-* GPIO (External Interrupt Included In GPIO Driver)
+* GPIO
+* EXTI
 * Timer (Timer0, Timer1, WDT)
 * PWM
+* ICU
 * ADC
 * TWI
 * SPI 
