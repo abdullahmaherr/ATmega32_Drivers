@@ -11,7 +11,7 @@
  =============================================================================================*/
 #include "lcd.h"
 #include "gpio.h"
-#include"atmega32.h"
+
 
 
 /*===============================================================================
@@ -79,10 +79,10 @@ void HAL_LCD_Init(void)
 void HAL_LCD_SendCommand(uint8_t a_command)
 {
 	delay_ms(5);/*Delay for Processing*/
-	MCAL_GPIO_WritePin(LCD_RS_PORT, LCD_RS_PIN, LOGIC_LOW);/*RS = 0 Send Command Mode */
+	MCAL_GPIO_WritePin(LCD_RS_PORT, LCD_RS_PIN, GPIO_CLEAR_PIN);/*RS = 0 Send Command Mode */
 	delay_ms(1);/*Delay for Processing*/
 
-	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, LOGIC_HIGH);/* Enable LCD E=1 */
+	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, GPIO_SET_PIN);/* Enable LCD E=1 */
 	delay_ms(1);/*Delay for Processing*/
 
 #if(LCD_DATA_BITS_MODE == 8)
@@ -96,9 +96,9 @@ void HAL_LCD_SendCommand(uint8_t a_command)
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_DB7_PIN, GET_BIT(a_command,7));
 
 	delay_ms(1);/*Delay for Processing*/
-	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, LOGIC_LOW);/* Disable LCD E=0 */
+	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, GPIO_CLEAR_PIN);/* Disable LCD E=0 */
 	delay_ms(1);/*Delay for Processing*/
-	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, LOGIC_HIGH);/* Enable LCD E=1 */
+	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, GPIO_SET_PIN);/* Enable LCD E=1 */
 
 	/*Send Least 4 Bit*/
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_DB4_PIN, GET_BIT(a_command,0));
@@ -108,18 +108,18 @@ void HAL_LCD_SendCommand(uint8_t a_command)
 #endif
 
 	delay_ms(1);/*Delay for Processing*/
-	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, LOGIC_LOW);/* Disable LCD E=0 */
+	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, GPIO_CLEAR_PIN);/* Disable LCD E=0 */
 	delay_ms(1);/*Delay for Processing*/
-	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, LOGIC_HIGH);/* Enable LCD E=1 */
+	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, GPIO_SET_PIN);/* Enable LCD E=1 */
 }
 
 void HAL_LCD_DisplayCharacter(uint8_t a_data)
 {
 	delay_ms(5);/*Delay for Processing*/
-	MCAL_GPIO_WritePin(LCD_RS_PORT, LCD_RS_PIN, LOGIC_HIGH);/*RS = 1 Data Mode */
+	MCAL_GPIO_WritePin(LCD_RS_PORT, LCD_RS_PIN, GPIO_SET_PIN);/*RS = 1 Data Mode */
 	delay_ms(1);/*Delay for Processing*/
 
-	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, LOGIC_HIGH);/* Enable LCD E=1 */
+	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, GPIO_SET_PIN);/* Enable LCD E=1 */
 	delay_ms(1);/*Delay for Processing*/
 
 #if(LCD_DATA_BITS_MODE == 8)
@@ -133,9 +133,9 @@ void HAL_LCD_DisplayCharacter(uint8_t a_data)
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_DB7_PIN, GET_BIT(a_data,7));
 
 	delay_ms(1);/*Delay for Processing*/
-	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, LOGIC_LOW);/* Disable LCD E=0 */
+	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, GPIO_CLEAR_PIN);/* Disable LCD E=0 */
 	delay_ms(1);/*Delay for Processing*/
-	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, LOGIC_HIGH);/* Enable LCD E=1 */
+	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, GPIO_SET_PIN);/* Enable LCD E=1 */
 
 	/*Send Least 4 Bit*/
 	MCAL_GPIO_WritePin(LCD_DATA_PORT, LCD_DB4_PIN, GET_BIT(a_data,0));
@@ -145,9 +145,9 @@ void HAL_LCD_DisplayCharacter(uint8_t a_data)
 #endif
 
 	delay_ms(1);/*Delay for Processing*/
-	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, LOGIC_LOW);/* Disable LCD E=0 */
+	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, GPIO_CLEAR_PIN);/* Disable LCD E=0 */
 	delay_ms(1);/*Delay for Processing*/
-	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, LOGIC_HIGH);/* Enable LCD E=1 */
+	MCAL_GPIO_WritePin(LCD_E_PORT, LCD_E_PIN, GPIO_SET_PIN);/* Enable LCD E=1 */
 }
 
 void HAL_LCD_DisplayString(const uint8_t * p_str)
