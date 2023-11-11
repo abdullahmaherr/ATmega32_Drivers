@@ -17,6 +17,7 @@
  *                                Includes                                       *
  ================================================================================*/
 #include "atmega32.h"
+#include "std_types.h"
 
 
 /*===============================================================================
@@ -24,13 +25,13 @@
  ================================================================================*/
 typedef struct
 {
-	uint16_t Timer_Mode;			/* Specifies The Timer Mode (Normal,CTC) Regarding to  @ref TIMER1 Mode*/
+	uint16_t Timer1_Mode;			/* Specifies The Timer Mode (Normal,CTC) Regarding to  @ref TIMER1 Mode*/
 
-	uint8_t Timer_Clock;	   		/* Specifies The Timer Clock Regarding to  @ref TIMER1 Clock&Prescaler*/
+	uint8_t Timer1_Clock;	   		/* Specifies The Timer Clock Regarding to  @ref TIMER1 Clock&Prescaler*/
 
-	uint8_t Timer_IntMask;			/* Specifies The Timer Interrupt Mask Regarding to  @ref TIMER1 Enable/Disabled*/
+	uint8_t Timer1_IRQ;				/* Specifies The Timer Interrupt Request Regarding to  @ref TIMER1 IRQ Enable/Disable */
 
-	void (*p_Timer_ISR)(void);		/* SET The Call Back Function That Will Be Called In ISR */
+	void (*p_Timer1_ISR)(void);		/* SET The Call Back Function That Will Be Called In ISR */
 
 }TIMER1_Config_t;
 
@@ -53,16 +54,16 @@ typedef struct
 #define TIMER1_CLK_EXTERNAL_FAILING			(0x06U)/* To Operate as Counter*/
 #define TIMER1_CLK_EXTERNAL_RAISING			(0x07U)/* To Operate as Counter*/
 
-/* @ref TIMER1 Enable/Disabled*/
-#define TIMER1_MASK_DISABLE					(0x00)
-#define TIMER1_MASK_OVF_ENABLE				(0x04)
-#define TIMER1_MASK_CTC_ENABLE				(0x18)
-#define TIMER1_MASK_CTC_A_ENABLE			(0x10)
-#define TIMER1_MASK_CTC_B_ENABLE			(0x08)
+/* @ref TIMER1 IRQ Enable/Disable */
+#define TIMER1_IRQ_DISABLE					(0x00U)
+#define TIMER1_IRQ_OVF_ENABLE				(0x04U)
+#define TIMER1_IRQ_CTC_ENABLE				(0x18U)
+#define TIMER1_IRQ_CTC_A_ENABLE				(0x10U)
+#define TIMER1_IRQ_CTC_B_ENABLE				(0x08U)
 
 /* Specifies the compare register 1 or 2 in CTC mode*/
-#define TIMER1_CTC_COMPARE_VALUE_A			(1)
-#define TIMER1_CTC_COMPARE_VALUE_B			(2)
+#define TIMER1_COMPARE_VALUE_A			(1)
+#define TIMER1_COMPARE_VALUE_B			(2)
 
 /*===============================================================================
  *                                	   APIs 		   		                     *
@@ -74,7 +75,7 @@ typedef struct
  * Parameter (in) : Timer1 Configuration.
  * Return         : None.
  * Note           : None.																	*/
-void MCAL_TIMER1_Init(TIMER1_Config_t *p_TIMER1_Config);
+void MCAL_TIMER1_init(const TIMER1_Config_t *p_TIMER1_Config);
 
 /**===============================================================================
  * Function Name  : MCAL_TIMER1_Stop.
@@ -82,7 +83,7 @@ void MCAL_TIMER1_Init(TIMER1_Config_t *p_TIMER1_Config);
  * Parameter (in) : None.
  * Return         : None.
  * Note           : None.																	*/
-void MCAL_TIMER1_Stop(void);
+void MCAL_TIMER1_stop(void);
 
 /**===============================================================================
  * Function Name  : MCAL_TIMER1_Resume.
@@ -90,7 +91,7 @@ void MCAL_TIMER1_Stop(void);
  * Parameter (in) : None.
  * Return         : None.
  * Note           : None.																	*/
-void MCAL_TIMER1_Resume(void);
+void MCAL_TIMER1_resume(void);
 
 /**===============================================================================
  * Function Name  : MCAL_TIMER1_SetCompareValue.
@@ -98,7 +99,7 @@ void MCAL_TIMER1_Resume(void);
  * Parameter (in) : Compare Value.
  * Return         : None.
  * Note           : None.																	*/
-void MCAL_TIMER1_SetCompareValue(uint16_t a_TicksNumber);
+void MCAL_TIMER1_setCompareValue(uint16_t a_TicksNumber);
 
 /**===============================================================================
  * Function Name  : MCAL_TIMER1_SetCounter.
@@ -106,6 +107,15 @@ void MCAL_TIMER1_SetCompareValue(uint16_t a_TicksNumber);
  * Parameter (in) : Counter Initial Value.
  * Return         : None.
  * Note           : None.																	*/
-void MCAL_TIMER1_SetCounter(uint16_t a_Counter);
+void MCAL_TIMER1_setCounter(uint16_t a_Counter);
+
+/**===============================================================================
+ * Function Name  : MCAL_TIMER1_ClearFlags.
+ * Brief          : Function To Clear All Flags.
+ * Parameter (in) : None.
+ * Return         : None.
+ * Note           : None.																	*/
+void MCAL_TIMER1_clearFlags(void);
+
 
 #endif /* INC_TIMER1_H_ */
