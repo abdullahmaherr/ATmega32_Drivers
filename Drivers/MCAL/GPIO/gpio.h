@@ -18,54 +18,62 @@
  *                                Includes                                       *
  ================================================================================*/
 #include "atmega32.h"
+#include "std_types.h"
 
+/*===============================================================================
+ *                            User Type Definitions                              *
+ ================================================================================*/
+typedef enum
+{
+	GPIOA_ID,
+	GPIOB_ID,
+	GPIOC_ID,
+	GPIOD_ID
+}GPIO_PORT_ID_t;
 
+typedef enum
+{
+	GPIO_PIN0,
+	GPIO_PIN1,
+	GPIO_PIN2,
+	GPIO_PIN3,
+	GPIO_PIN4,
+	GPIO_PIN5,
+	GPIO_PIN6,
+	GPIO_PIN7,
+}GPIO_PIN_ID_t;
+
+typedef enum
+{
+	GPIO_ClEAR_PORT = 0x00,
+	GPIO_SET_PORT = 0xFF
+
+}GPIO_PORT_VALUE_t;
+
+typedef enum
+{
+	GPIO_CLEAR_PIN,
+	GPIO_SET_PIN
+}GPIO_PIN_VALUE_t;
+
+typedef enum
+{
+	GPIO_PIN_INPUT,
+	GPIO_PIN_OUTPUT
+}GPIO_PIN_Direction_t;
+
+typedef enum
+{
+	GPIO_PORT_INPUT,
+	GPIO_PORT_OUTPUT = 0xFF
+}GPIO_PORT_Direction_t;
 /*===============================================================================
  *                       Macros Configuration References                         *
  ================================================================================*/
 #define NUM_OF_PORTS           	 4
 #define NUM_OF_PINS              8
 
-/* @ref Port Number ID */
-#define GPIOA_ID       	         0
-#define GPIOB_ID           	     1
-#define GPIOC_ID               	 2
-#define GPIOD_ID               	 3
 
-/* @ref Pin Number ID */
-#define GPIO_PIN0                0
-#define GPIO_PIN1                1
-#define GPIO_PIN2                2
-#define GPIO_PIN3                3
-#define GPIO_PIN4                4
-#define GPIO_PIN5                5
-#define GPIO_PIN6                6
-#define GPIO_PIN7                7
-
-#define GPIO_SET_ALL_PIN			 (0xFFu)
-#define GPIO_ClEAR_ALL_PIN			 (0x00u)
-
-/* @ref pin Direction if Input or output */
-#define GPIO_PIN_INPUT				 0U
-#define GPIO_PIN_OUTPUT				 1U
-
-/* @ref port Direction if Input or output */
-#define GPIO_PORT_INPUT				 (0x00)
-#define GPIO_PORT_OUTPUT			 (0xFF)
-
-/* @ref INT_TRIGGER_SELECT_DEFINE */
-#define  INT_RISING_FALLING_TRIG 			0
-#define  INT_FALLING_TRIG 					1
-#define  INT_RISING_TRIG 					2
-
-/* @ref INT_MASK_DEFINE */
-#define INT_MASK_DISABLE					0
-#define INT_MASK_ENABLE						1
-
-
-
-#define LOGIC_HIGH (1u)
-#define LOGIC_LOW (0u)
 /*===============================================================================
  *                                	   APIs 		   		                     *
  ================================================================================*/
@@ -120,38 +128,6 @@ void MCAL_GPIO_WritePort(uint8_t PORTx, uint8_t a_Value);
  * Return         : None.
  * Note           : None																	*/
 void MCAL_GPIO_PortInit(uint8_t PORTx, uint8_t Direction);
-
-
-
-/**===============================================================================
- * Function Name  : MCAL_GPIO_INT0Init.
- * Brief          : Function To Initialization The External Interrupt 0.
- * Parameter (in) : Interrupt Trigger Case.
- * Parameter (in) : Enable/Disable Interrupt Mask.
- * Parameter (in) : Address Of ISR Function .
- * Return         : None.
- * Note           : Must To Enable The Global Interrupt Before Using It.					*/
-void MCAL_GPIO_INT0Init(uint8_t a_triggerCase, uint8_t a_IntMask,void (*p_ISR0)(void));
-
-/**===============================================================================
- * Function Name  : MCAL_GPIO_INT1Init.
- * Brief          : Function To Initialization The External Interrupt 1.
- * Parameter (in) : Interrupt Trigger Case.
- * Parameter (in) : Enable/Disable Interrupt Mask.
- * Parameter (in) : Address Of ISR Function .
- * Return         : None.
- * Note           : Must To Enable The Global Interrupt Before Using It.					*/
-void MCAL_GPIO_INT1Init(uint8_t a_triggerCase, uint8_t a_IntMask,void (*p_ISR1)(void));
-
-/**===============================================================================
- * Function Name  : MCAL_GPIO_INT2Init.
- * Brief          : Function To Initialization The External Interrupt 2.
- * Parameter (in) : Interrupt Trigger Case.
- * Parameter (in) : Enable/Disable Interrupt Mask.
- * Parameter (in) : Address Of ISR Function .
- * Return         : None.
- * Note           : Must To Enable The Global Interrupt Before Using It.					*/
-void MCAL_GPIO_INT2Init(uint8_t a_triggerCase, uint8_t a_IntMask,void (*p_ISR2)(void));
 
 
 #endif /* INC_GPIO_H_ */

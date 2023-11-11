@@ -14,14 +14,7 @@
  *                                Includes                                       *
  ================================================================================*/
 #include "gpio.h"
-#include "avr/io.h"
 
-
-/*===============================================================================
- *                              Global Variables                                 *
- ================================================================================*/
-
-void (*gp_CallBack[3])(void);
 
 /*===============================================================================
  *                              API Definitions                                  *
@@ -135,41 +128,41 @@ uint8_t MCAL_GPIO_ReadPin(uint8_t PORTx, uint8_t a_PinNumber)
 		case GPIOA_ID:
 			if(BIT_IS_SET(PINA,a_PinNumber))
 			{
-				pin_value = LOGIC_HIGH;
+				pin_value = GPIO_SET_PIN;
 			}
 			else
 			{
-				pin_value = LOGIC_LOW;
+				pin_value = GPIO_CLEAR_PIN;
 			}
 			break;
 		case GPIOB_ID:
 			if(BIT_IS_SET(PINB,a_PinNumber))
 			{
-				pin_value = LOGIC_HIGH;
+				pin_value = GPIO_SET_PIN;
 			}
 			else
 			{
-				pin_value = LOGIC_LOW;
+				pin_value = GPIO_CLEAR_PIN;
 			}
 			break;
 		case GPIOC_ID:
 			if(BIT_IS_SET(PINC,a_PinNumber))
 			{
-				pin_value = LOGIC_HIGH;
+				pin_value = GPIO_SET_PIN;
 			}
 			else
 			{
-				pin_value = LOGIC_LOW;
+				pin_value = GPIO_CLEAR_PIN;
 			}
 			break;
 		case GPIOD_ID:
 			if(BIT_IS_SET(PIND,a_PinNumber))
 			{
-				pin_value = LOGIC_HIGH;
+				pin_value = GPIO_SET_PIN;
 			}
 			else
 			{
-				pin_value = LOGIC_LOW;
+				pin_value = GPIO_CLEAR_PIN;
 			}
 			break;
 		}
@@ -194,7 +187,7 @@ void MCAL_GPIO_WritePin(uint8_t PORTx, uint8_t a_PinNumber, uint8_t a_Value)
 		switch(PORTx)
 		{
 		case GPIOA_ID:
-			if(a_Value == LOGIC_HIGH)
+			if(a_Value == GPIO_SET_PIN)
 			{
 				SET_BIT(PORTA,a_PinNumber);
 			}
@@ -204,7 +197,7 @@ void MCAL_GPIO_WritePin(uint8_t PORTx, uint8_t a_PinNumber, uint8_t a_Value)
 			}
 			break;
 		case GPIOB_ID:
-			if(a_Value == LOGIC_HIGH)
+			if(a_Value == GPIO_SET_PIN)
 			{
 				SET_BIT(PORTB,a_PinNumber);
 			}
@@ -214,7 +207,7 @@ void MCAL_GPIO_WritePin(uint8_t PORTx, uint8_t a_PinNumber, uint8_t a_Value)
 			}
 			break;
 		case GPIOC_ID:
-			if(a_Value == LOGIC_HIGH)
+			if(a_Value == GPIO_SET_PIN)
 			{
 				SET_BIT(PORTC,a_PinNumber);
 			}
@@ -224,7 +217,7 @@ void MCAL_GPIO_WritePin(uint8_t PORTx, uint8_t a_PinNumber, uint8_t a_Value)
 			}
 			break;
 		case GPIOD_ID:
-			if(a_Value == LOGIC_HIGH)
+			if(a_Value == GPIO_SET_PIN)
 			{
 				SET_BIT(PORTD,a_PinNumber);
 			}
@@ -300,96 +293,3 @@ void MCAL_GPIO_WritePort(uint8_t PORTx, uint8_t a_Value)
 		}
 	}
 }
-
-void MCAL_GPIO_INT0Init(uint8_t a_triggerCase, uint8_t a_IntMask,void (*p_ISR0)(void))
-{
-	/*Configure PORTD PIN2 as Input for INT1*/
-	DDRD &= (~(1<<PD2));
-
-	/*Configure Trigger Case if Raising or Failing or Both*/
-	MCUCR |= (a_triggerCase & 0x03);
-
-	/*Assign The CallBack Function With The User's ISR*/
-	gp_CallBack[0] = p_ISR0;
-
-	/*Enable/Disable MASK INT1*/
-	switch(a_IntMask)
-	{
-	case INT_MASK_DISABLE:
-		CLEAR_BIT(GICR,INT0); break;
-	case INT_MASK_ENABLE:
-		SET_BIT(GICR,INT0); break;
-	}
-}
-
-void MCAL_GPIO_INT1Init(uint8_t a_triggerCase, uint8_t a_IntMask,void (*p_ISR1)(void))
-{
-	/*Configure PORTD PIN3 as Input for INT0*/
-	DDRD &= (~(1<<PD3));
-
-	/*Configure Trigger Case if Raising or Failing or Both*/
-	MCUCR |= ((a_triggerCase & 0x03) << 2);
-
-	/*Assign The CallBack Function With The User's ISR*/
-	gp_CallBack[1] = p_ISR1;
-
-	/*Enable/Disable MASK INT0*/
-	switch(a_IntMask)
-	{
-	case INT_MASK_DISABLE:
-		CLEAR_BIT(GICR,INT1); break;
-	case INT_MASK_ENABLE:
-		SET_BIT(GICR,INT1); break;
-	}
-}
-
-void MCAL_GPIO_INT2Init(uint8_t a_triggerCase, uint8_t a_IntMask,void (*p_ISR2)(void))
-{
-	/*Configure PORTB PIN2 as Input for INT2*/
-	DDRB &= (~(1<<PB2));
-
-	/*Configure Trigger Case if Raising or Failing or Both*/
-	switch(a_triggerCase)
-	{
-	case INT_FALLING_TRIG:
-		CLEAR_BIT(MCUCSR,ISC2); break;
-	case INT_RISING_TRIG:
-		SET_BIT(MCUCSR,ISC2); break;
-	default:
-		return;
-	}
-
-	/*Assign The CallBack Function With The User's ISR*/
-	gp_CallBack[2] = p_ISR2;
-
-	/*Enable/Disable MASK INT2*/
-	switch(a_IntMask)
-	{
-	case INT_MASK_DISABLE:
-		CLEAR_BIT(GICR,INT2); break;
-	case INT_MASK_ENABLE:
-		SET_BIT(GICR,INT2); break;
-	}
-}
-
-
-/*===============================================================================
- *                       		 ISR Functions  		                         *
- ================================================================================*/
-ISR(INT0_vect)
-{
-	(*gp_CallBack[0])();
-}
-
-
-ISR(INT1_vect)
-{
-	(*gp_CallBack[1])();
-}
-
-
-ISR(INT2_vect)
-{
-	(*gp_CallBack[2])();
-}
-
