@@ -28,12 +28,12 @@
 
 /* Select The Voltage Reference Value */
 #define LM35_ADC_MAX_RES 		1023
-#define LM35_ADC_Vref_Value	 	2.56
+#define LM35_ADC_Vref_VALUE	 	2.56
 #define LM35_MAX_VOLT 			1.5
 #define LM35_MAX_TEMP 			150
 
 /* Select The Voltage Reference Source */
-#define LM35_ADC_Vref_Source ADC_INTERNAL_Vref
+#define LM35_ADC_Vref_SOURCE ADC_INTERNAL_Vref
 
 /*===============================================================================
  *                                	   APIs 		   		                     *
