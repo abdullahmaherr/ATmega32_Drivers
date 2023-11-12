@@ -17,6 +17,7 @@
  *                                Includes                                       *
  ================================================================================*/
 #include "atmega32.h"
+#include "std_types.h"
 
 
 /*===============================================================================
@@ -24,9 +25,10 @@
  ================================================================================*/
 
 typedef struct{
-	uint8_t VoltRef;  /*Specifies The Voltage Reference Regarding to  @ref The Source Of Reference Voltage*/
+	uint8_t ADC_VoltRef;  /*Specifies The Voltage Reference Regarding to  @ref The Source Of Reference Voltage*/
 
-	uint8_t Prescaler;  /*Specifies The Prescaler Regarding to  @ref The Prescaler Division Factor */
+	uint8_t ADC_Prescaler;  /*Specifies The Prescaler Regarding to  @ref The Prescaler Division Factor */
+
 }ADC_Config_t;
 
 /*===============================================================================
@@ -47,7 +49,7 @@ typedef struct{
 #define ADC_CH6					(0x06U)
 #define ADC_CH7					(0x07U)
 
-/* @ref The Prescaler Division Factor */
+/* @ref The Prescaler Division Factor */		/*We use registers ADPS2:0 to select the conversion speed*/
 #define ADC_PRESCALE_2 			(0x00U)
 #define ADC_PRESCALE_4 			(0x02U)
 #define ADC_PRESCALE_8 			(0x03U)
@@ -67,7 +69,7 @@ typedef struct{
  * Return         : None.
  * Note           : F ADC must to be between 50kHz and 200 kHz to get maximum resolution.
  	 	 	 	 	The ADC working in Single-ended, Polling,  */
-void MCAL_ADC_Init(ADC_Config_t *p_Config);
+void MCAL_ADC_init(const ADC_Config_t *p_Config);
 
 /**===============================================================================
  * Function Name  : MCAL_ADC_ReadChannel.
@@ -75,6 +77,6 @@ void MCAL_ADC_Init(ADC_Config_t *p_Config);
  * Parameter (in) : Channel Number.
  * Return         : The Desired Data.
  * Note           : None																	*/
-uint16_t MCAL_ADC_ReadChannel(uint8_t a_channelx);
+uint16_t MCAL_ADC_readChannel(uint8_t a_channelx);
 
 #endif /* INC_ADC_H_ */
