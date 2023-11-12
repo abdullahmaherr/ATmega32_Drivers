@@ -30,7 +30,7 @@
 void HAL_LM35_ADC_init(void)
 {
 	ADC_Config_t LM35_config;
-	LM35_config.ADC_VoltRef = ADC_INTERNAL_Vref;
+	LM35_config.ADC_VoltRef = LM35_ADC_Vref_Source;
 	LM35_config.ADC_Prescaler = ADC_PRESCALE_8;
 	MCAL_ADC_init(&LM35_config);
 }
