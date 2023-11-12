@@ -17,6 +17,7 @@
  *                                Includes                                       *
  ================================================================================*/
 #include "atmega32.h"
+#include "std_types.h"
 
 /*===============================================================================
  *                       Macros Configuration References                         *
@@ -27,7 +28,7 @@
 
 /* Select The Voltage Reference Value */
 #define LM35_ADC_MAX_RES 		1023
-#define LM35_ADC_Vref_Value	 	5
+#define LM35_ADC_Vref_Value	 	2.56
 #define LM35_MAX_VOLT 			1.5
 #define LM35_MAX_TEMP 			150
 
@@ -35,6 +36,13 @@
 /*===============================================================================
  *                                	   APIs 		   		                     *
  ================================================================================*/
+/**===============================================================================
+ * Function Name  : HAL_LM35_ADC_init.
+ * Brief          : Function To Initialize the ADC to Read LM35.
+ * Parameter (in) : None.
+ * Return         : None.
+ * Note           : None.																				  */
+void HAL_LM35_ADC_init(void);
 
 /**===============================================================================
  * Function Name  : HAL_LM35_GetTemp.
@@ -42,6 +50,6 @@
  * Parameter (in) : None.
  * Return         : The Measured Temp.
  * Note           : None.																				  */
-uint8_t HAL_LM35_GetTemp(void);
+uint8_t HAL_LM35_getTemp(void);
 
 #endif /* INC_LM35_H_ */

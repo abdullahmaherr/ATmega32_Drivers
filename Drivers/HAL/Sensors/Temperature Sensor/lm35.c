@@ -27,12 +27,20 @@
  *                              API Definitions                                  *
  ================================================================================*/
 
-uint8_t HAL_LM35_GetTemp(void)
+void HAL_LM35_ADC_init(void)
+{
+	ADC_Config_t LM35_config;
+	LM35_config.ADC_VoltRef = ADC_INTERNAL_Vref;
+	LM35_config.ADC_Prescaler = ADC_PRESCALE_8;
+	MCAL_ADC_init(&LM35_config);
+}
+
+uint8_t HAL_LM35_getTemp(void)
 {
 	uint16_t adc_value = 0;
 	uint8_t temp = 0;
 
-	adc_value = MCAL_ADC_ReadChannel(LM35_CHANNEL);
+	adc_value = MCAL_ADC_readChannel(LM35_CHANNEL);
 
 	temp = (uint8_t)(((uint32_t)adc_value * LM35_MAX_TEMP * LM35_ADC_Vref_Value)/(LM35_ADC_MAX_RES * LM35_MAX_VOLT));
 
