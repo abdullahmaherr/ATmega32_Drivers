@@ -25,7 +25,7 @@
  ================================================================================*/
 typedef struct
 {
-	uint16_t Timer1_Mode;			/* Specifies The Timer Mode (Normal,CTC) Regarding to  @ref TIMER1 Mode*/
+	uint8_t Timer1_Mode;			/* Specifies The Timer Mode (Normal,CTC) Regarding to  @ref TIMER1 Mode*/
 
 	uint8_t Timer1_Clock;	   		/* Specifies The Timer Clock Regarding to  @ref TIMER1 Clock&Prescaler*/
 
@@ -41,8 +41,8 @@ typedef struct
  ================================================================================*/
 
 /* @ref TIMER1 Mode*/
-#define TIMER1_MODE_OVF						(0x000C)
-#define TIMER1_MODE_CTC						(0x080C)
+#define TIMER1_MODE_OVF						(0x00U)
+#define TIMER1_MODE_CTC						(0x08U)
 
 /* @ref TIMER1 Clock&Prescaler */
 #define TIMER1_CLK_STOP						(0x00U)
@@ -99,7 +99,15 @@ void MCAL_TIMER1_resume(void);
  * Parameter (in) : Compare Value.
  * Return         : None.
  * Note           : None.																	*/
-void MCAL_TIMER1_setCompareValue(uint16_t a_TicksNumber);
+void MCAL_TIMER1_setCompareValue_A(uint16_t a_TicksNumber);
+
+/**===============================================================================
+ * Function Name  : MCAL_TIMER1_SetCompareValue.
+ * Brief          : Function To Set Timer1 Compare Value In CTC Mode.
+ * Parameter (in) : Compare Value.
+ * Return         : None.
+ * Note           : None.																	*/
+void MCAL_TIMER1_setCompareValue_B(uint16_t a_TicksNumber);
 
 /**===============================================================================
  * Function Name  : MCAL_TIMER1_SetCounter.
