@@ -22,6 +22,9 @@
 
 static void (*gp_CallBack[3])(void) = {NULL_PTR,NULL_PTR,NULL_PTR};
 
+EXTI_Config_t g_EXTI0_Config;
+EXTI_Config_t g_EXTI1_Config;
+EXTI_Config_t g_EXTI2_Config;
 /*===============================================================================
  *                       		 ISR Functions  		                         *
  ================================================================================*/
@@ -49,19 +52,21 @@ ISR(INT2_vect)
  *                              API Definitions                                  *
  ================================================================================*/
 
-void MCAL_EXTI_INT0Init(EXTI_Config_t p_INT0_Config)
+void MCAL_EXTI_INT0Init(EXTI_Config_t *p_INT0_Config)
 {
+	g_EXTI0_Config = *p_INT0_Config;
+
 	/*Configure PORTD PIN2 as Input for INT1*/
 	DDRD &= (~(1<<PD2));
 
 	/*Configure Trigger Case if Raising or Failing or Both*/
-	MCUCR |= (p_INT0_Config.EXTI_TriggerCase & 0x03);
+	MCUCR = (MCUCR & 0xFC) | (p_INT0_Config->EXTI_TriggerCase);
 
 	/*Assign The CallBack Function With The User's ISR*/
-	gp_CallBack[0] = p_INT0_Config.p_EXTI_ISR[0];
+	gp_CallBack[0] = p_INT0_Config->p_EXTI_ISR;
 
 	/*Enable/Disable MASK INT1*/
-	switch(p_INT0_Config.EXTI_IRQ)
+	switch(p_INT0_Config->EXTI_IRQ)
 	{
 	case EXTI_IRQ_DISABLE:
 		CLEAR_BIT(GICR,INT0); break;
@@ -72,19 +77,21 @@ void MCAL_EXTI_INT0Init(EXTI_Config_t p_INT0_Config)
 	}
 }
 
-void MCAL_EXTI_INT1Init(EXTI_Config_t p_INT1_Config)
+void MCAL_EXTI_INT1Init(EXTI_Config_t *p_INT1_Config)
 {
+	g_EXTI1_Config = *p_INT1_Config;
+
 	/*Configure PORTD PIN3 as Input for INT1*/
 	DDRD &= (~(1<<PD3));
 
 	/*Configure Trigger Case if Raising or Failing or Both*/
-	MCUCR |= ((p_INT1_Config.EXTI_TriggerCase & 0x03) << 2);
+	MCUCR = (MCUCR & 0xF3) | ((p_INT1_Config->EXTI_TriggerCase) << 2);
 
 	/*Assign The CallBack Function With The User's ISR*/
-	gp_CallBack[1] = p_INT1_Config.p_EXTI_ISR[1];
+	gp_CallBack[1] = p_INT1_Config->p_EXTI_ISR;
 
 	/*Enable/Disable MASK INT1*/
-	switch(p_INT1_Config.EXTI_IRQ)
+	switch(p_INT1_Config->EXTI_IRQ)
 	{
 	case EXTI_IRQ_DISABLE:
 		CLEAR_BIT(GICR,INT1); break;
@@ -95,13 +102,15 @@ void MCAL_EXTI_INT1Init(EXTI_Config_t p_INT1_Config)
 	}
 }
 
-void MCAL_EXTI_INT2Init(EXTI_Config_t p_INT2_Config)
+void MCAL_EXTI_INT2Init(EXTI_Config_t *p_INT2_Config)
 {
+	g_EXTI2_Config = *p_INT2_Config;
+
 	/*Configure PORTB PIN2 as Input for INT2*/
 	DDRB &= (~(1<<PB2));
 
 	/*Configure Trigger Case if Raising or Failing or Both*/
-	switch(p_INT2_Config.EXTI_TriggerCase)
+	switch(p_INT2_Config->EXTI_TriggerCase)
 	{
 	case EXTI_FALLING_TRIG:
 		CLEAR_BIT(MCUCSR,ISC2); break;
@@ -112,10 +121,10 @@ void MCAL_EXTI_INT2Init(EXTI_Config_t p_INT2_Config)
 	}
 
 	/*Assign The CallBack Function With The User's ISR*/
-	gp_CallBack[2] = p_INT2_Config.p_EXTI_ISR[2];
+	gp_CallBack[2] = p_INT2_Config->p_EXTI_ISR;
 
 	/*Enable/Disable MASK INT2*/
-	switch(p_INT2_Config.EXTI_IRQ)
+	switch(p_INT2_Config->EXTI_IRQ)
 	{
 	case EXTI_IRQ_DISABLE:
 		CLEAR_BIT(GICR,INT2); break;

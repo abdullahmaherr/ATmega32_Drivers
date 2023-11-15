@@ -28,7 +28,7 @@ typedef struct
 
 	uint8_t EXTI_IRQ;			/* Specifies The EXTI Interrupt Request Regarding to  @ref EXTI IRQ Enable/Disable */
 
-	void (*p_EXTI_ISR[3])(void);
+	void (*p_EXTI_ISR)(void);
 
 }EXTI_Config_t;
 
@@ -38,9 +38,9 @@ typedef struct
  ================================================================================*/
 
 /* @ref EXTI_TRIGGER_SELECT */
-#define  EXTI_RISING_FALLING_TRIG 			0
-#define  EXTI_FALLING_TRIG 					1
-#define  EXTI_RISING_TRIG					2
+#define  EXTI_RISING_FALLING_TRIG 			(0x00U)
+#define  EXTI_FALLING_TRIG 					(0x01U)
+#define  EXTI_RISING_TRIG					(0x02U)
 
 /*  @ref EXTI IRQ Enable/Disable */
 #define EXTI_IRQ_DISABLE					0
@@ -58,7 +58,7 @@ typedef struct
  * Parameter (in) : Pointer To The Configuration.
  * Return         : None.
  * Note           : None.																			*/
-void MCAL_EXTI_INT0Init(EXTI_Config_t p_INT0_Config);
+void MCAL_EXTI_INT0Init(EXTI_Config_t *p_INT0_Config);
 
 /**===============================================================================
  * Function Name  : MCAL_EXTI_INT1Init.
@@ -66,7 +66,7 @@ void MCAL_EXTI_INT0Init(EXTI_Config_t p_INT0_Config);
  * Parameter (in) : Pointer To The Configuration.
  * Return         : None.
  * Note           : None.																			*/
-void MCAL_EXTI_INT1Init(EXTI_Config_t p_INT1_Config);
+void MCAL_EXTI_INT1Init(EXTI_Config_t *p_INT1_Config);
 
 /**===============================================================================
  * Function Name  : MCAL_EXTI_INT2Init.
@@ -74,7 +74,7 @@ void MCAL_EXTI_INT1Init(EXTI_Config_t p_INT1_Config);
  * Parameter (in) : Pointer To The Configuration.
  * Return         : None.
  * Note           : None.																			*/
-void MCAL_EXTI_INT2Init(EXTI_Config_t p_INT2_Config);
+void MCAL_EXTI_INT2Init(EXTI_Config_t *p_INT2_Config);
 
 
 
