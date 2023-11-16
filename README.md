@@ -25,6 +25,7 @@ The following drivers are included in this repository:
 * Keypad
 * LCD
 * External EEPROM
+* 7-Segment
 * Motor (DC, Servo, Stepper)
 * Sensors (LM35, Ultrasonic, )
 
