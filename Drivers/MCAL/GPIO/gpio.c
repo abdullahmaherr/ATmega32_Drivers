@@ -230,6 +230,37 @@ void MCAL_GPIO_WritePin(uint8_t PORTx, uint8_t a_PinNumber, uint8_t a_Value)
 	}
 }
 
+void MCAL_GPIO_TogglePin(uint8_t PORTx, uint8_t a_PinNumber)
+{
+	/*
+	 * Check if the input port number is greater than NUM_OF_PINS_PER_PORT.
+	 * Or if the input pin number is greater than NUM_OF_PINS_PER_PORT.
+	 */
+	if((a_PinNumber >= NUM_OF_PINS) || (PORTx >= NUM_OF_PORTS))
+	{
+		/* Do Nothing */
+	}
+	else
+	{
+		/* Toggle the pin value */
+		switch(PORTx)
+		{
+		case GPIOA_ID:
+			TOGGLE_BIT(PORTA,a_PinNumber);
+			break;
+		case GPIOB_ID:
+			TOGGLE_BIT(PORTB,a_PinNumber);
+			break;
+		case GPIOC_ID:
+			TOGGLE_BIT(PORTC,a_PinNumber);
+			break;
+		case GPIOD_ID:
+			TOGGLE_BIT(PORTD,a_PinNumber);
+			break;
+		}
+	}
+}
+
 uint8_t MCAL_GPIO_ReadPort(uint8_t PORTx)
 {
 	uint8_t port_value = 0;

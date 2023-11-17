@@ -105,6 +105,15 @@ uint8_t MCAL_GPIO_ReadPin(uint8_t PORTx, uint8_t a_PinNumber);
 void MCAL_GPIO_WritePin(uint8_t PORTx, uint8_t a_PinNumber, uint8_t a_Value);
 
 /**===============================================================================
+ * Function Name  : MCAL_GPIO_WritePin.
+ * Brief          : Function To Toggle a Pin in PORTx.
+ * Parameter (in) : PORTx is Port ID.
+ * Parameter (in) : The Pin To Toggle it.
+ * Return         : None.
+ * Note           : None																	*/
+void MCAL_GPIO_TogglePin(uint8_t PORTx, uint8_t a_PinNumber);
+
+/**===============================================================================
  * Function Name  : MCAL_GPIO_ReadPort.
  * Brief          : Function To Read PORTx, x could be A,B,C or D.
  * Parameter (in) : PORTx is Port ID to Read it.
