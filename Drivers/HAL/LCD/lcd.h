@@ -17,14 +17,14 @@
  *                                Includes                                       *
  ================================================================================*/
 #include "atmega32.h"
-#include "gpio.h"
+#include "std_types.h"
 
 /*===============================================================================
  *                       User Type Definitions Macros                            *
  ================================================================================*/
 
 /* LCD Data bits mode configuration, its value should be 4 or 8*/
-#define LCD_DATA_BITS_MODE 4 /*Write 4 or 8 Bits Mode*/
+#define LCD_DATA_BITS_MODE 8 /*Write 4 or 8 Bits Mode*/
 
 #if((LCD_DATA_BITS_MODE != 4) && (LCD_DATA_BITS_MODE != 8))
 
@@ -38,11 +38,11 @@
 /* @ref Port Number ID (gpio.h)*/
 /* @ref Pin Number ID (gpio.h)*/
 
-#define LCD_RS_PORT         	        GPIOA_ID
-#define LCD_RS_PIN      	            GPIO_PIN1
+#define LCD_RS_PORT         	        GPIOC_ID
+#define LCD_RS_PIN      	            GPIO_PIN0
 
-#define LCD_E_PORT  	                GPIOA_ID
-#define LCD_E_PIN	                    GPIO_PIN2
+#define LCD_E_PORT  	                GPIOC_ID
+#define LCD_E_PIN	                    GPIO_PIN1
 
 #define LCD_DATA_PORT              	 	GPIOA_ID
 
@@ -158,6 +158,14 @@ void HAL_LCD_ClearScreen(void);
  * Parameter (in) : The Integer Number.
  * Return         : None.
  * Note           : None*/
-void HAL_LCD_IntgerToString(uint32_t a_data);
+void HAL_LCD_IntgerToString(sint32_t a_data);
+
+/**===============================================================================
+ * Function Name  : HAL_LCD_DisplayNumber.
+ * Brief          : Function To Display 1 Digit Number on LCD.
+ * Parameter (in) : number to display.
+ * Return         : None.
+ * Note           : None*/
+void HAL_LCD_DisplayNumber(uint8_t a_data);
 
 #endif /* INC_LCD_H_ */

@@ -24,8 +24,14 @@
  * Return         : None.
  * Note           : None																				*/
 static void delay_ms(uint32_t delay);
-
-
+/**===============================================================================
+ * Function Name  : NumToString.
+ * Brief          : Function To Make Delay.
+ * Parameter (in) : The Buffer To Store String.
+ * Parameter (in) : Number To Be Converted.
+ * Return         : None.
+ * Note           : None
+static void NumToString(uint8_t buff[], sint32_t num); 													*/
 /*===============================================================================
  *                              API Definitions                                  *
  ================================================================================*/
@@ -208,10 +214,11 @@ void HAL_LCD_ClearScreen(void)
 	HAL_LCD_SendCommand(LCD_CMD_CLEAR_SCREEN);
 }
 
-void HAL_LCD_IntgerToString(uint32_t a_data)
+void HAL_LCD_IntgerToString(sint32_t a_data)
 {
 	uint8_t buffer[16];
-	itoa(a_data,buffer,10); /*The function ltoa() converts the long integer value from val into an ASCII representation*/
+	itoa(a_data,buffer,10); /*The function ltoa() converts the long integer value from Integer into an ASCII representation*/
+	//NumToString(buffer,a_data)  /* function to convert the long integer value from Integer into an ASCII representation */
 	HAL_LCD_DisplayString(buffer);
 }
 
@@ -223,3 +230,36 @@ static void delay_ms(uint32_t delay)
 		for (j = 0; j < 255; j++);
 	}
 }
+
+void HAL_LCD_DisplayNumber(uint8_t a_data)
+{
+	uint8_t asci_num;
+	if((a_data >= 0) && (a_data <= 9))
+	{
+		asci_num = '0' + a_data;
+		HAL_LCD_DisplayCharacter(asci_num);
+	}
+}
+
+/*static void NumToString(uint8_t buff[], sint32_t num)
+{
+	sint32_t i,rem,length = 0, temp;
+
+	temp = num;
+	while(temp != 0)
+	{
+		length++;
+		temp /= 10;
+	}
+
+	for(i = length-1; i >= 0; i--)
+	{
+		rem = num % 10;
+		num /= 10;
+		buff[i] = rem + '0';
+	}
+
+	buff[length] = '\0';
+}
+
+*/
