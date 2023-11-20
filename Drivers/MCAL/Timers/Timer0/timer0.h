@@ -86,7 +86,7 @@ void MCAL_TIMER0_stop(void);
  * Parameter (in) : None.
  * Return         : None.
  * Note           : None.																	*/
-void MCAL_TIMER0_resume(void);
+void MCAL_TIMER0_Start(void);
 
 /**===============================================================================
  * Function Name  : MCAL_TIMER0_SetCompareValue.

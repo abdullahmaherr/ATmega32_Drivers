@@ -73,18 +73,16 @@ void MCAL_TIMER1_init(const TIMER1_Config_t *p_TIMER1_Config)
 	TCCR1B = (p_TIMER1_Config->Timer1_Mode) | (p_TIMER1_Config->Timer1_Clock);
 }
 
+void MCAL_TIMER1_start(void)
+{
+	/* Start Timer1 by Setting Prescaler */
+	TCCR1B |= (g_TIMER1_Config.Timer1_Clock);
+}
 
 void MCAL_TIMER1_stop(void)
 {
 	/* Stop Timer1 by Clearing Clock */
 	TCCR1B &= (~(0x07));
-}
-
-
-void MCAL_TIMER1_resume(void)
-{
-	/* Resume Timer1 by Setting Prescaler */
-	TCCR1B |= (g_TIMER1_Config.Timer1_Clock);
 }
 
 

@@ -79,7 +79,7 @@ void MCAL_TIMER0_stop(void)
 }
 
 
-void MCAL_TIMER0_resume(void)
+void MCAL_TIMER0_Start(void)
 {
 	/* Resume Timer0 by Setting Prescaler */
 	TCCR0 |= (g_TIMER0_Config.Timer0_Clock);

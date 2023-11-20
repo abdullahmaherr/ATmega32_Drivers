@@ -78,20 +78,20 @@ typedef struct
 void MCAL_TIMER1_init(const TIMER1_Config_t *p_TIMER1_Config);
 
 /**===============================================================================
+ * Function Name  : MCAL_TIMER1_start.
+ * Brief          : Function To Start Timer1 Count.
+ * Parameter (in) : None.
+ * Return         : None.
+ * Note           : None.																	*/
+void MCAL_TIMER1_start(void);
+
+/**===============================================================================
  * Function Name  : MCAL_TIMER1_Stop.
  * Brief          : Function To Stop Timer1 Counter.
  * Parameter (in) : None.
  * Return         : None.
  * Note           : None.																	*/
 void MCAL_TIMER1_stop(void);
-
-/**===============================================================================
- * Function Name  : MCAL_TIMER1_Resume.
- * Brief          : Function To Resume Timer1 Counter.
- * Parameter (in) : None.
- * Return         : None.
- * Note           : None.																	*/
-void MCAL_TIMER1_resume(void);
 
 /**===============================================================================
  * Function Name  : MCAL_TIMER1_SetCompareValue.
