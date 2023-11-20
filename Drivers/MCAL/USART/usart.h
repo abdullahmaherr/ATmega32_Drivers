@@ -87,17 +87,11 @@ typedef struct
 #define USART_STOP_BIT_2					(0x08U)
 
 /* @ref USART Interrupt Enable/Disable */
-#define USART_RTXC_IRQ_DISABLE				(0x00)
+#define USART_RTXC_IRQ_DISABLE				(0x00)/* Polling Mechanism Enabled */
 #define USART_RXC_IRQ_ENABLE				(0x80)
 #define USART_TXC_IRQ_ENABLE				(0x40)
 #define USART_RTXC_IRQ_ENABLE				(0xC0)
 
-/*@ref Polling Enable/Disable */
-typedef enum
-{
-	USART_POLLING_DISABLE,
-	USART_POLLING_ENABLE
-}USART_Polling_Mecanism;
 
 /*===============================================================================
  *                                	   APIs 		   		                     *
@@ -124,18 +118,17 @@ void MCAL_USART_deinit(void);
  * Function Name  : MCAL_USART_TX.
  * Brief          : Function To Transmit The Data .
  * Parameter (in) : Data to Transmit it.
- * Parameter (in) : Selection of Polling.
  * Return         : None.
  * Note           : None.																		*/
-void MCAL_USART_TX(uint16_t a_data,uint8_t a_Polling);
+void MCAL_USART_TX(uint16_t a_data);
 
 /**===============================================================================
  * Function Name  : MCAL_USART_RX.
  * Brief          : Function To Receive The UART.
- * Parameter (in) : Selection of Polling.
+ * Parameter (in) : None.
  * Return         : The Received Data.
  * Note           : None.																			*/
-uint16_t MCAL_USART_RX(uint8_t a_Polling);
+uint16_t MCAL_USART_RX(void);
 
 /**===============================================================================
  * Function Name  : MCAL_USART_sendString.
